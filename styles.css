@@ -970,8 +970,10 @@ button { font-family: inherit; cursor: pointer; }
 .reveal {
   opacity: 0; transform: translateY(28px);
   transition: opacity .6s var(--ease), transform .6s var(--ease);
+  animation: reveal-fallback .6s var(--ease) 1.2s both;
 }
-.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal.in { opacity: 1; transform: translateY(0); animation: none; }
+@keyframes reveal-fallback { to { opacity: 1; transform: translateY(0); } }
 
 /* ═══════════ REDUCED MOTION ═══════════ */
 @media (prefers-reduced-motion: reduce) {
