@@ -84,6 +84,7 @@
             data-stack="Python, Streamlit, Pandas, Optimization"
             data-img="assets/images/dashboard.png"
             data-link="https://github.com/jringler30/portfolio-tlh-optimizer"
+            data-app="https://apptradetlhoptimizer-gcvhbubcxpurnhq8e8tv4f.streamlit.app/"
             tabindex="0" role="button" aria-label="View Portfolio TLH Optimizer details">
             <div class="card__img">
               <img src="assets/images/dashboard.png" alt="Portfolio TLH Optimizer screenshot" loading="lazy" />
@@ -164,6 +165,7 @@
             data-stack="Python, PyTorch, CNN, Transformers, AWS, Anvil, Docker"
             data-img="assets/images/connect_4.png"
             data-link="https://github.com/jringler30/Connect4Bot"
+            data-app="https://msba25optim2-group30.anvil.app/"
             tabindex="0" role="button" aria-label="View Connect 4 AI details">
             <div class="card__img">
               <img src="assets/images/connect_4.png" alt="Connect 4 AI project" loading="lazy" />
@@ -397,7 +399,10 @@
         <h3 id="modalTitle" class="modal__title"></h3>
         <p id="modalDesc" class="modal__desc"></p>
         <ul id="modalStack" class="modal__stack"></ul>
-        <a id="modalLink" href="#" class="btn" target="_blank" rel="noopener">View on GitHub →</a>
+        <div class="modal__actions">
+          <a id="modalLink" href="#" class="btn" target="_blank" rel="noopener">View on GitHub →</a>
+          <a id="modalAppLink" href="#" class="btn btn--ghost" target="_blank" rel="noopener" style="display:none;">View Live App →</a>
+        </div>
       </div>
     </div>
   </div>
@@ -483,6 +488,7 @@
       const modalDesc = document.getElementById('modalDesc');
       const modalStack = document.getElementById('modalStack');
       const modalLink = document.getElementById('modalLink');
+      const modalAppLink = document.getElementById('modalAppLink');
       const modalClose = document.getElementById('modalClose');
       let lastFocused = null;
 
@@ -493,6 +499,12 @@
         modalImg.src = card.dataset.img;
         modalImg.alt = card.dataset.title + ' screenshot';
         modalLink.href = card.dataset.link;
+        if (card.dataset.app) {
+          modalAppLink.href = card.dataset.app;
+          modalAppLink.style.display = '';
+        } else {
+          modalAppLink.style.display = 'none';
+        }
         modalStack.innerHTML = card.dataset.stack.split(', ').map(s => `<li>${s}</li>`).join('');
         backdrop.classList.add('open');
         backdrop.setAttribute('aria-hidden', 'false');
@@ -647,7 +659,7 @@
 
       // ESC closes any open mobile bottom-sheet
       document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && mobileTipQuery.matches) closeAllTips();
+         if (e.key === 'Escape' && mobileTipQuery.matches) closeAllTips();
       });
 
       mobileTipQuery.addEventListener('change', () => {
