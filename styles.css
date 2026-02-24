@@ -202,7 +202,7 @@ button { font-family: inherit; cursor: pointer; }
   display: grid;
   grid-template-columns: 1.2fr .8fr;
   gap: clamp(32px, 6vw, 80px);
-  align-items: center;
+  align-items: stretch;
 }
 
 .hero__kicker {
@@ -228,6 +228,27 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero__photo {
+  position: relative;
+  border-radius: calc(var(--rad) + 4px);
+  overflow: hidden;
+  align-self: stretch;
+  justify-self: end;
+  width: 100%;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+.hero__photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: var(--rad);
+}
+.hero__photo::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: var(--rad);
+  border: 1px solid var(--rule);
+  pointer-events: none;
+}
 
 /* ═══════════ HERO CREDIBILITY STRIP ═══════════ */
 .hero__creds {
@@ -947,9 +968,9 @@ button { font-family: inherit; cursor: pointer; }
     gap: var(--sp-xl);
   }
   .hero__photo {
-    max-width: 280px;
     justify-self: start;
     order: -1;
+    max-height: 280px;
   }
   .hero { min-height: auto; padding-top: calc(var(--navH) + var(--sp-xl)); padding-bottom: var(--sp-2xl); }
 
@@ -968,7 +989,7 @@ button { font-family: inherit; cursor: pointer; }
 
   .hero__name { font-size: clamp(40px, 12vw, 60px); }
 
-  .hero__photo { max-width: 200px; }
+  .hero__photo { max-height: 200px; }
 
   .skills { grid-template-columns: 1fr; }
 
