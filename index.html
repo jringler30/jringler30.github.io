@@ -296,6 +296,10 @@
         </div>
 
         <!-- Education inline -->
+        <header class="section__head">
+          <span class="label">EDUCATION</span>
+          <h2>Education.</h2>
+        </header>
         <div class="edu reveal">
           <div class="edu__item">
             <h4>MS Business Analytics</h4>
@@ -563,7 +567,7 @@
       updateHTL();
 
       /* --- Mobile tap-to-toggle tooltip (bottom-sheet with backdrop) --- */
-      const isTouchDevice = matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const mobileTipQuery = matchMedia('(max-width: 768px), (hover: none) and (pointer: coarse)');
       const htlBackdrop = document.getElementById('htlBackdrop');
 
       function closeAllTips() {
@@ -572,32 +576,41 @@
         document.body.style.overflow = '';
       }
 
-      if (isTouchDevice) {
-        htlCards.forEach(card => {
-          card.addEventListener('click', e => {
-            e.stopPropagation();
-            const wasOpen = card.classList.contains('tip-open');
-            closeAllTips();
-            if (!wasOpen) {
-              card.classList.add('tip-open');
-              if (htlBackdrop) htlBackdrop.classList.add('visible');
-              document.body.style.overflow = 'hidden';
-            }
-          });
-        });
-
-        // Tap backdrop closes bottom-sheet
-        if (htlBackdrop) {
-          htlBackdrop.addEventListener('click', closeAllTips);
-        }
-
-        // Tap outside closes tooltip
-        document.addEventListener('click', e => {
-          if (!e.target.closest('.htl-card') && !e.target.closest('.htl-tip')) {
-            closeAllTips();
+      htlCards.forEach(card => {
+        card.addEventListener('click', e => {
+          if (!mobileTipQuery.matches) return;
+          e.stopPropagation();
+          const wasOpen = card.classList.contains('tip-open');
+          closeAllTips();
+          if (!wasOpen) {
+            card.classList.add('tip-open');
+            if (htlBackdrop) htlBackdrop.classList.add('visible');
+            document.body.style.overflow = 'hidden';
           }
         });
+      });
+
+      // Tap backdrop closes bottom-sheet
+      if (htlBackdrop) {
+        htlBackdrop.addEventListener('click', closeAllTips);
       }
+
+      // Tap outside closes tooltip (mobile only)
+      document.addEventListener('click', e => {
+        if (!mobileTipQuery.matches) return;
+        if (!e.target.closest('.htl-card') && !e.target.closest('.htl-tip')) {
+          closeAllTips();
+        }
+      });
+
+      // ESC closes any open mobile bottom-sheet
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && mobileTipQuery.matches) closeAllTips();
+      });
+
+      mobileTipQuery.addEventListener('change', () => {
+        if (!mobileTipQuery.matches) closeAllTips();
+      });
 
     })();
   </script>

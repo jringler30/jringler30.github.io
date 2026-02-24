@@ -372,6 +372,7 @@ button { font-family: inherit; cursor: pointer; }
 .htl-wrap {
   position: relative;
   padding: 0 0 var(--sp-2xl);
+  overflow: visible;
 }
 
 /* Controls row (indicator + arrows) */
@@ -429,13 +430,15 @@ button { font-family: inherit; cursor: pointer; }
   display: flex;
   gap: 24px;
   overflow-x: auto;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  padding: 48px var(--gutter) 32px;
+  padding: 70px var(--gutter) 32px;
   max-width: var(--mw);
   margin: 0 auto;
   position: relative;
+  isolation: isolate;
 
   /* Visible styled scrollbar */
   scrollbar-width: thin;
@@ -468,6 +471,7 @@ button { font-family: inherit; cursor: pointer; }
 .htl-card {
   flex: 0 0 clamp(260px, 30vw, 320px);
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: var(--rad);
@@ -544,30 +548,53 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--ink-3);
 }
 
-/* ═══════ TOOLTIP — rendered as expandable panel inside card ═══════ */
+/* ═══════ TOOLTIP — floating on desktop / bottom-sheet on mobile ═══════ */
 .htl-tip {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--rule);
-  max-height: 0;
-  overflow: hidden;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 14px);
+  width: min(360px, calc(100vw - (var(--gutter) * 2)));
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--rad);
+  box-shadow: var(--card-hover);
+  padding: 12px;
   opacity: 0;
-  transition: max-height .35s var(--ease), opacity .25s var(--ease), padding .25s;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s;
   pointer-events: none;
+  z-index: 30;
 }
 
-/* Show on hover (desktop) */
+.htl-tip::after {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 100%;
+  width: 10px;
+  height: 10px;
+  background: var(--surface);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  transform: rotate(45deg) translateY(-3px);
+}
+
+/* Show on hover/focus (desktop) */
 .htl-card:hover .htl-tip,
+.htl-card:focus-within .htl-tip,
 .htl-card:focus-visible .htl-tip {
-  max-height: 300px;
   opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
   pointer-events: auto;
 }
 
 /* Show when tapped (mobile — toggled via JS) */
 .htl-card.tip-open .htl-tip {
-  max-height: 300px;
   opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
   pointer-events: auto;
 }
 
@@ -609,19 +636,70 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--accent); opacity: .45;
 }
 
-/* Mobile: only show tooltip on tap, not hover */
-@media (max-width: 600px) {
-  .htl-card:hover .htl-tip,
-  .htl-card:focus-visible .htl-tip {
-    max-height: 0; opacity: 0;
+/* Mobile: bottom-sheet tooltip */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .htl-track {
+    overflow-y: hidden;
   }
+
+  .htl-card .htl-tip {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: min(62vh, 420px);
+    overflow-y: auto;
+    border-radius: 14px 14px 0 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    padding: 16px 20px 22px;
+    transform: translateY(100%);
+    z-index: 950;
+  }
+
+  .htl-card .htl-tip::after {
+    display: none;
+  }
+
+  .htl-card:hover .htl-tip,
+  .htl-card:focus-within .htl-tip,
+  .htl-card:focus-visible .htl-tip {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%);
+    pointer-events: none;
+  }
+
   .htl-card.tip-open .htl-tip {
-    max-height: 300px; opacity: 1;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 }
 
 /* Rail dots are decorative HTML elements — hidden since we use card::before for dot rendering */
 .htl-rail { display: none; }
+
+
+/* Backdrop for mobile bottom-sheet */
+.htl-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--modal-bg);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .25s var(--ease), visibility .25s;
+  z-index: 900;
+}
+.htl-backdrop.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 
 /* ═══════════ SKILLS ═══════════ */
 .skills {
@@ -830,6 +908,7 @@ button { font-family: inherit; cursor: pointer; }
   .reveal { opacity: 1; transform: none; }
   .htl-track { scroll-behavior: auto; }
   .htl-tip { transition: none; }
+  .htl-tip::after { transition: none; }
   .htl-card { transition: none; }
   .htl-card::before, .htl-card::after { transition: none; }
   .htl-progress__fill { transition: none; }
