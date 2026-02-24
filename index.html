@@ -267,6 +267,8 @@
           </article>
 
         </div>
+        <!-- Mobile bottom-sheet backdrop -->
+        <div class="htl-backdrop" id="htlBackdrop" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -560,25 +562,39 @@
       // Initial state
       updateHTL();
 
-      /* --- Mobile tap-to-toggle tooltip --- */
+      /* --- Mobile tap-to-toggle tooltip (bottom-sheet with backdrop) --- */
       const isTouchDevice = matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const htlBackdrop = document.getElementById('htlBackdrop');
+
+      function closeAllTips() {
+        htlCards.forEach(c => c.classList.remove('tip-open'));
+        if (htlBackdrop) htlBackdrop.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
 
       if (isTouchDevice) {
         htlCards.forEach(card => {
           card.addEventListener('click', e => {
             e.stopPropagation();
             const wasOpen = card.classList.contains('tip-open');
-            // Close all
-            htlCards.forEach(c => c.classList.remove('tip-open'));
-            // Toggle current
-            if (!wasOpen) card.classList.add('tip-open');
+            closeAllTips();
+            if (!wasOpen) {
+              card.classList.add('tip-open');
+              if (htlBackdrop) htlBackdrop.classList.add('visible');
+              document.body.style.overflow = 'hidden';
+            }
           });
         });
 
+        // Tap backdrop closes bottom-sheet
+        if (htlBackdrop) {
+          htlBackdrop.addEventListener('click', closeAllTips);
+        }
+
         // Tap outside closes tooltip
         document.addEventListener('click', e => {
-          if (!e.target.closest('.htl-card')) {
-            htlCards.forEach(c => c.classList.remove('tip-open'));
+          if (!e.target.closest('.htl-card') && !e.target.closest('.htl-tip')) {
+            closeAllTips();
           }
         });
       }
