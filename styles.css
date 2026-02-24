@@ -437,11 +437,17 @@ button { font-family: inherit; cursor: pointer; }
   margin: 0 auto;
   position: relative;
 
-  /* Hide scrollbar but keep functionality */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  /* Visible styled scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-4) transparent;
 }
-.htl-track::-webkit-scrollbar { display: none; }
+.htl-track::-webkit-scrollbar { height: 6px; }
+.htl-track::-webkit-scrollbar-track { background: transparent; }
+.htl-track::-webkit-scrollbar-thumb {
+  background: var(--ink-4);
+  border-radius: 4px;
+}
+.htl-track::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* Rail line drawn behind cards — uses a tall inline element to span full scroll width */
 .htl-track::before {
@@ -538,36 +544,30 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--ink-3);
 }
 
-/* ═══════ TOOLTIP ═══════ */
+/* ═══════ TOOLTIP — rendered as expandable panel inside card ═══════ */
 .htl-tip {
-  position: absolute;
-  bottom: calc(100% + 14px); left: 0;
-  width: max(100%, 300px);
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--rad);
-  padding: var(--sp-md) var(--sp-lg);
-  box-shadow: 0 12px 40px rgba(0,0,0,.12);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  max-height: 0;
+  overflow: hidden;
   opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s;
-  z-index: 50;
+  transition: max-height .35s var(--ease), opacity .25s var(--ease), padding .25s;
   pointer-events: none;
 }
 
 /* Show on hover (desktop) */
 .htl-card:hover .htl-tip,
 .htl-card:focus-visible .htl-tip {
-  opacity: 1; visibility: visible;
-  transform: translateY(0);
+  max-height: 300px;
+  opacity: 1;
   pointer-events: auto;
 }
 
 /* Show when tapped (mobile — toggled via JS) */
 .htl-card.tip-open .htl-tip {
-  opacity: 1; visibility: visible;
-  transform: translateY(0);
+  max-height: 300px;
+  opacity: 1;
   pointer-events: auto;
 }
 
@@ -609,44 +609,15 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--accent); opacity: .45;
 }
 
-/* Mobile: tooltip becomes bottom-sheet with backdrop */
+/* Mobile: only show tooltip on tap, not hover */
 @media (max-width: 600px) {
-  .htl-tip {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    top: auto;
-    width: 100%;
-    border-radius: 16px 16px 0 0;
-    max-height: 55vh;
-    overflow-y: auto;
-    transform: translateY(100%);
-    padding: var(--sp-lg);
-    box-shadow: 0 -8px 40px rgba(0,0,0,.15);
-  }
-  /* Prevent hover showing on touch — only tap */
   .htl-card:hover .htl-tip,
   .htl-card:focus-visible .htl-tip {
-    opacity: 0; visibility: hidden; transform: translateY(100%);
+    max-height: 0; opacity: 0;
   }
   .htl-card.tip-open .htl-tip {
-    opacity: 1; visibility: visible;
-    transform: translateY(0);
-    z-index: 600;
+    max-height: 300px; opacity: 1;
   }
-}
-
-/* Mobile backdrop when bottom-sheet is open */
-.htl-backdrop {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.4);
-  z-index: 590;
-  opacity: 0; visibility: hidden;
-  transition: opacity .3s var(--ease), visibility .3s;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
-}
-.htl-backdrop.visible {
-  opacity: 1; visibility: visible;
 }
 
 /* Rail dots are decorative HTML elements — hidden since we use card::before for dot rendering */
