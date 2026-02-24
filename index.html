@@ -1,294 +1,426 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Joshua Ringler — Analytics · Decision Systems · Strategy" />
+  <meta name="description" content="Joshua Ringler — Analytics, Decision Systems, Strategy" />
   <title>Joshua Ringler</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=General+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <a href="#top" class="nav__name">Joshua Ringler</a>
-    <div class="nav__right">
-      <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
+  <!-- ============ NAVBAR ============ -->
+  <header class="nav" id="navbar">
+    <nav class="nav__inner" aria-label="Primary">
+      <a href="#" class="nav__logo" aria-label="Home">JR</a>
+      <ul class="nav__links" role="list">
+        <li><a href="#about" class="nav__link" data-nav>About</a></li>
+        <li><a href="#work" class="nav__link" data-nav>Work</a></li>
+        <li><a href="#experience" class="nav__link" data-nav>Experience</a></li>
+        <li><a href="#skills" class="nav__link" data-nav>Skills</a></li>
+        <li><a href="#contact" class="nav__link" data-nav>Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" type="button">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+      </button>
+    </nav>
+  </header>
 
   <main>
 
-    <!-- ━━━━━━━━━━━ HERO ━━━━━━━━━━━ -->
-    <section class="hero" id="top">
-      <div class="hero__content">
-        <div class="hero__left">
-          <h1 class="hero__title">
-            <span class="anim" style="--i:0">Joshua</span>
-            <span class="anim" style="--i:1">Ringler</span>
-          </h1>
+    <!-- ============ HERO / ABOUT ============ -->
+    <section class="hero" id="about">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <p class="hero__kicker anim" style="--i:0">Analytics · Strategy · Decision Systems</p>
+          <h1 class="hero__name anim" style="--i:1">Joshua<br>Ringler</h1>
+          <p class="hero__pitch anim" style="--i:2">
+            Building analytical systems that turn complex data into clear business decisions. MS Business Analytics at UT&nbsp;Austin McCombs — I design optimization engines, data pipelines, and decision tools for high-stakes&nbsp;problems.
+          </p>
+          <div class="hero__cta anim" style="--i:3">
+            <a href="#work" class="btn">View Work</a>
+            <a href="#contact" class="btn btn--ghost">Contact</a>
+          </div>
         </div>
-        <div class="hero__right anim" style="--i:2">
-          <p class="hero__lead">
-            Building analytical systems that turn complex data into clear business&nbsp;decisions.
-          </p>
-          <p class="hero__sub">
-            MS Business Analytics, UT Austin McCombs. I design optimization engines, data pipelines, and decision tools for organizations navigating high-stakes, ambiguous&nbsp;problems.
-          </p>
-          <div class="hero__links">
-            <a href="#work" class="btn">Selected Work</a>
-            <a href="#contact" class="btn btn--ghost">Get in Touch</a>
+        <div class="hero__photo anim" style="--i:2">
+          <img src="assets/images/headshot.jpg" alt="Joshua Ringler headshot" width="400" height="400" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK ============ -->
+    <section class="section" id="work">
+      <div class="container">
+        <header class="section__head">
+          <span class="label">Selected Work</span>
+          <h2>Systems I've built.</h2>
+        </header>
+
+        <!-- Filter chips -->
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="chip active" data-filter="all" type="button">All</button>
+          <button class="chip" data-filter="optimization" type="button">Optimization</button>
+          <button class="chip" data-filter="dashboard" type="button">Dashboard</button>
+          <button class="chip" data-filter="ml-nlp" type="button">ML / NLP</button>
+          <button class="chip" data-filter="network" type="button">Network</button>
+        </div>
+
+        <!-- Project grid -->
+        <div class="projects" id="projectGrid">
+
+          <article class="card" data-tags="optimization"
+            data-title="Portfolio TLH Optimizer"
+            data-desc="Optimization engine that models tax-loss harvesting strategies across user-defined portfolios. Features scenario analysis, constraint handling, and interactive KPI reporting — deployed as a production Streamlit application for the Vise capstone. Enables retail investors to systematically identify and execute TLH opportunities across diversified holdings."
+            data-stack="Python, Streamlit, Pandas, Optimization"
+            data-img="assets/images/tlh-optimizer.png"
+            data-link="https://github.com/jringler30/portfolio-tlh-optimizer"
+            tabindex="0" role="button" aria-label="View Portfolio TLH Optimizer details">
+            <div class="card__img">
+              <img src="assets/images/tlh-optimizer.png" alt="Portfolio TLH Optimizer screenshot" loading="lazy" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Portfolio TLH Optimizer</h3>
+              <p class="card__desc">Tax-loss harvesting engine with scenario analysis and interactive KPI reporting via Streamlit.</p>
+              <ul class="card__tags" aria-label="Technologies">
+                <li>Python</li><li>Streamlit</li><li>Optimization</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card" data-tags="dashboard"
+            data-title="Financial Analytics Toolkit"
+            data-desc="End-to-end pipeline for portfolio return calculations, factor decomposition, and interactive performance visualization. Built first in Jupyter as a research tool, then refactored and shipped as a Streamlit web application for broader team use. Supports WRDS data ingestion and automated reporting workflows."
+            data-stack="Python, Streamlit, NumPy, Plotly"
+            data-img="assets/images/toolkit.png"
+            data-link="https://github.com/jringler30/financial-analytics-toolkit"
+            tabindex="0" role="button" aria-label="View Financial Analytics Toolkit details">
+            <div class="card__img">
+              <img src="assets/images/toolkit.png" alt="Financial Analytics Toolkit screenshot" loading="lazy" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Financial Analytics Toolkit</h3>
+              <p class="card__desc">Portfolio return calculator with factor decomposition and interactive Plotly dashboards.</p>
+              <ul class="card__tags" aria-label="Technologies">
+                <li>Python</li><li>Analytics</li><li>Dashboard</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card" data-tags="ml-nlp"
+            data-title="ML &amp; NLP Research"
+            data-desc="Applied machine learning projects spanning classification, clustering, and deep learning — including NLP sentiment analysis on earnings call transcripts to predict short-term stock returns. Covers logistic regression, PCA, Gaussian Mixture Models, neural networks, and forward-looking statement detection with strong correlation results."
+            data-stack="scikit-learn, PyTorch, NLP, Pandas"
+            data-img="assets/images/ml-nlp.png"
+            data-link="https://github.com/jringler30/applied-machine-learning"
+            tabindex="0" role="button" aria-label="View ML and NLP Research details">
+            <div class="card__img">
+              <img src="assets/images/ml-nlp.png" alt="ML and NLP research notebook" loading="lazy" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">ML &amp; NLP Research</h3>
+              <p class="card__desc">Earnings call NLP, sentiment analysis, and applied ML spanning classification to deep learning.</p>
+              <ul class="card__tags" aria-label="Technologies">
+                <li>PyTorch</li><li>scikit-learn</li><li>ML/NLP</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card" data-tags="network"
+            data-title="Email Network Scraper"
+            data-desc="Selenium-based web scraper that extracts communication metadata from email archives, then applies community detection algorithms on bipartite graphs to reveal hidden organizational structure and communication patterns. Designed for large-scale network analysis research."
+            data-stack="Selenium, NetworkX, Python, Graph Theory"
+            data-img="assets/images/email-scraper.png"
+            data-link="https://github.com/jringler30/email-network-scraper"
+            tabindex="0" role="button" aria-label="View Email Network Scraper details">
+            <div class="card__img">
+              <img src="assets/images/email-scraper.png" alt="Email network graph visualization" loading="lazy" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Email Network Scraper</h3>
+              <p class="card__desc">Selenium scraper with community detection on bipartite email communication graphs.</p>
+              <ul class="card__tags" aria-label="Technologies">
+                <li>Selenium</li><li>NetworkX</li><li>Network</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section section--alt" id="experience">
+      <div class="container">
+        <header class="section__head">
+          <span class="label">Experience</span>
+          <h2>Where I've worked.</h2>
+        </header>
+
+        <ol class="timeline" role="list">
+          <li class="tl reveal">
+            <time>2024 – 2025</time>
+            <div>
+              <h3>Graduate Capstone Consultant</h3>
+              <p class="tl__co">Vise</p>
+              <p>Designed portfolio optimization and tax-loss harvesting systems for an automated investment platform. Built analytical engines, decision logic, and client-facing Streamlit tools.</p>
+            </div>
+          </li>
+          <li class="tl reveal">
+            <time>2024</time>
+            <div>
+              <h3>Business Analyst Intern</h3>
+              <p class="tl__co">Bell Flight</p>
+              <p>Strategic analysis and operational decision-making through data modeling, KPI development, and cross-functional reporting for aviation programs.</p>
+            </div>
+          </li>
+          <li class="tl reveal">
+            <time>2023</time>
+            <div>
+              <h3>Commercial Strategy &amp; Data Analyst</h3>
+              <p class="tl__co">Wayfair</p>
+              <p>Commercial analytics informing category strategy and pricing. Built SQL pipelines and visualization tools for merchandising leadership.</p>
+            </div>
+          </li>
+          <li class="tl reveal">
+            <time>2022 – 2024</time>
+            <div>
+              <h3>NLP Research</h3>
+              <p class="tl__co">Purdue University</p>
+              <p>NLP on unstructured text classification. Awarded <strong>first place</strong> at Purdue's undergraduate research exposition.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="container">
+        <header class="section__head">
+          <span class="label">Capabilities</span>
+          <h2>What I work with.</h2>
+        </header>
+
+        <div class="skills reveal">
+          <div class="skills__col">
+            <h3>Languages</h3>
+            <ul><li>Python</li><li>SQL</li><li>R</li></ul>
+          </div>
+          <div class="skills__col">
+            <h3>Analytics &amp; ML</h3>
+            <ul><li>Machine Learning</li><li>Optimization</li><li>Statistical Modeling</li><li>NLP</li><li>Data Visualization</li></ul>
+          </div>
+          <div class="skills__col">
+            <h3>Infrastructure &amp; Tools</h3>
+            <ul><li>Streamlit</li><li>Snowflake</li><li>GitHub</li><li>Jupyter</li><li>Tableau</li></ul>
+          </div>
+        </div>
+
+        <!-- Education inline -->
+        <div class="edu reveal">
+          <div class="edu__item">
+            <h4>MS Business Analytics</h4>
+            <p>UT Austin · McCombs — <time>2024–2025</time></p>
+          </div>
+          <div class="edu__item">
+            <h4>BS Business Analytics &amp; Info Management</h4>
+            <p>Purdue University · Daniels — <time>2020–2024</time></p>
           </div>
         </div>
       </div>
-      <div class="hero__scroll anim" style="--i:4">
-        <span></span>
-      </div>
     </section>
 
-    <!-- ━━━━━━━━━━━ SELECTED WORK ━━━━━━━━━━━ -->
-    <section class="work" id="work">
-      <header class="work__header reveal">
-        <span class="label">Selected Work</span>
-        <h2>Systems I've built.</h2>
-      </header>
-
-      <!-- Project 1 -->
-      <article class="project reveal">
-        <div class="project__meta">
-          <span class="project__num">01</span>
-          <span class="project__tag">Optimization · Streamlit</span>
-        </div>
-        <div class="project__body">
-          <h3 class="project__title">Portfolio TLH&nbsp;Optimizer</h3>
-          <p class="project__story">
-            Retail investors lose billions annually to sub-optimal tax management. I built an optimization engine that models tax-loss harvesting strategies across diversified portfolios — with scenario analysis, constraint handling, and interactive KPI reporting — deployed as a production Streamlit application for the Vise&nbsp;capstone.
-          </p>
-          <ul class="project__stack">
-            <li>Python</li><li>Streamlit</li><li>Pandas</li><li>Optimization</li>
-          </ul>
-          <a href="https://github.com/jringler30/portfolio-tlh-optimizer" class="project__link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-
-      <div class="divider"></div>
-
-      <!-- Project 2 -->
-      <article class="project project--flip reveal">
-        <div class="project__meta">
-          <span class="project__num">02</span>
-          <span class="project__tag">Dashboard · Analytics</span>
-        </div>
-        <div class="project__body">
-          <h3 class="project__title">Financial Analytics&nbsp;Toolkit</h3>
-          <p class="project__story">
-            Portfolio managers need to decompose returns, risk, and factor exposure in real-time. I designed an end-to-end pipeline for return calculations, factor decomposition, and interactive performance visualization — built first in Jupyter, then shipped as a Streamlit web&nbsp;application.
-          </p>
-          <ul class="project__stack">
-            <li>Python</li><li>Streamlit</li><li>NumPy</li><li>Plotly</li>
-          </ul>
-          <a href="https://github.com/jringler30/financial-analytics-toolkit" class="project__link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-
-      <div class="divider"></div>
-
-      <!-- Project 3 -->
-      <article class="project reveal">
-        <div class="project__meta">
-          <span class="project__num">03</span>
-          <span class="project__tag">Reinforcement Learning</span>
-        </div>
-        <div class="project__body">
-          <h3 class="project__title">Connect-4 AI&nbsp;Agent</h3>
-          <p class="project__story">
-            Can a system learn optimal strategy purely through self-play, with zero human heuristics? I built an AlphaZero-style architecture combining Monte Carlo tree search with dual-head neural networks and tactical safety layers to achieve competitive play&nbsp;strength.
-          </p>
-          <ul class="project__stack">
-            <li>Python</li><li>PyTorch</li><li>MCTS</li><li>Neural Networks</li>
-          </ul>
-          <a href="https://github.com/jringler30/applied-machine-learning" class="project__link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-
-      <div class="divider"></div>
-
-      <!-- Project 4 -->
-      <article class="project project--flip reveal">
-        <div class="project__meta">
-          <span class="project__num">04</span>
-          <span class="project__tag">NLP · Machine Learning</span>
-        </div>
-        <div class="project__body">
-          <h3 class="project__title">ML &amp; NLP&nbsp;Research</h3>
-          <p class="project__story">
-            Applied machine learning across classification, clustering, and deep learning — including NLP sentiment analysis on earnings call transcripts to predict short-term stock returns. Spans logistic regression, PCA, GMMs, and neural&nbsp;networks.
-          </p>
-          <ul class="project__stack">
-            <li>scikit-learn</li><li>PyTorch</li><li>NLP</li><li>Pandas</li>
-          </ul>
-          <a href="https://github.com/jringler30/applied-machine-learning" class="project__link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-
-      <div class="divider"></div>
-
-      <!-- Project 5 -->
-      <article class="project reveal">
-        <div class="project__meta">
-          <span class="project__num">05</span>
-          <span class="project__tag">Data Infrastructure</span>
-        </div>
-        <div class="project__body">
-          <h3 class="project__title">Snowflake Analytics&nbsp;Pipeline</h3>
-          <p class="project__story">
-            Messy source data at scale demands a structured analytical layer. I designed and deployed an ingestion, transformation, and reporting pipeline in Snowflake — enabling clean, queryable data across multiple sources for the Vise investment&nbsp;platform.
-          </p>
-          <ul class="project__stack">
-            <li>Snowflake</li><li>SQL</li><li>Data Modeling</li><li>ETL</li>
-          </ul>
-          <a href="https://github.com/jringler30/Vise-Capstone-Project" class="project__link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-
-      <div class="divider"></div>
-
-      <!-- Project 6 -->
-      <article class="project project--flip reveal">
-        <div class="project__meta">
-          <span class="project__num">06</span>
-          <span class="project__tag">Network Analysis</span>
-        </div>
-        <div class="project__body">
-          <h3 class="project__title">Email Network&nbsp;Scraper</h3>
-          <p class="project__story">
-            Large-scale communication networks contain hidden community structure. I built a Selenium scraper extracting metadata from email archives, then applied community detection on bipartite graphs to surface organizational&nbsp;patterns.
-          </p>
-          <ul class="project__stack">
-            <li>Selenium</li><li>NetworkX</li><li>Python</li><li>Graph Theory</li>
-          </ul>
-          <a href="https://github.com/jringler30/email-network-scraper" class="project__link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-    </section>
-
-    <!-- ━━━━━━━━━━━ EXPERIENCE ━━━━━━━━━━━ -->
-    <section class="exp" id="experience">
-      <header class="exp__header reveal">
-        <span class="label">Experience</span>
-        <h2>Where I've worked.</h2>
-      </header>
-
-      <div class="timeline">
-        <article class="tl reveal">
-          <time>2024 – 2025</time>
-          <div>
-            <h3>Graduate Capstone Consultant</h3>
-            <p class="tl__co">Vise</p>
-            <p>Designed portfolio optimization and tax-loss harvesting systems for an automated investment platform. Built analytical engines, decision logic, and client-facing Streamlit tools deployed in production.</p>
+    <!-- ============ CONTACT ============ -->
+    <section class="section section--alt" id="contact">
+      <div class="container contact">
+        <header class="section__head">
+          <span class="label">Contact</span>
+          <h2>Let's talk.</h2>
+        </header>
+        <p class="contact__sub">Open to analytics, consulting, product, and strategy roles.</p>
+        <div class="contact__row">
+          <div class="contact__email-group">
+            <a href="mailto:jringler@utexas.edu" class="contact__link">jringler@utexas.edu</a>
+            <button class="copy-btn" id="copyEmail" type="button" aria-label="Copy email address">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span>Copy</span>
+            </button>
           </div>
-        </article>
-
-        <article class="tl reveal">
-          <time>2024</time>
-          <div>
-            <h3>Business Analyst Intern</h3>
-            <p class="tl__co">Bell Flight</p>
-            <p>Strategic analysis and operational decision-making through data modeling, KPI development, and cross-functional reporting for advanced aviation programs.</p>
-          </div>
-        </article>
-
-        <article class="tl reveal">
-          <time>2023</time>
-          <div>
-            <h3>Commercial Strategy &amp; Data Analyst</h3>
-            <p class="tl__co">Wayfair</p>
-            <p>Commercial analytics informing category strategy and pricing. Built SQL pipelines and visualization tools surfacing actionable insights for merchandising leadership.</p>
-          </div>
-        </article>
-
-        <article class="tl reveal">
-          <time>2022 – 24</time>
-          <div>
-            <h3>NLP Research</h3>
-            <p class="tl__co">Purdue University</p>
-            <p>Applied NLP to unstructured text classification and pattern extraction. Awarded first place at Purdue's undergraduate research exposition.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ━━━━━━━━━━━ CAPABILITIES ━━━━━━━━━━━ -->
-    <section class="cap reveal">
-      <header class="cap__header">
-        <span class="label">Capabilities</span>
-        <h2>What I work with.</h2>
-      </header>
-
-      <div class="cap__grid">
-        <div class="cap__col">
-          <h4>Languages</h4>
-          <p>Python · SQL · R</p>
-        </div>
-        <div class="cap__col">
-          <h4>Analytics &amp; ML</h4>
-          <p>Machine Learning · Optimization · Statistical Modeling · NLP · Data Visualization</p>
-        </div>
-        <div class="cap__col">
-          <h4>Infrastructure</h4>
-          <p>Streamlit · Snowflake · GitHub · Jupyter · Tableau</p>
+          <a href="https://linkedin.com/in/joshuaringler" class="contact__link" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/jringler30" class="contact__link" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
       </div>
     </section>
-
-    <!-- ━━━━━━━━━━━ EDUCATION ━━━━━━━━━━━ -->
-    <section class="edu reveal">
-      <div class="edu__row">
-        <div class="edu__item">
-          <h4>MS Business Analytics</h4>
-          <p>UT Austin · McCombs</p>
-          <time>2024 – 2025</time>
-        </div>
-        <div class="edu__item">
-          <h4>BS Business Analytics &amp; Information Management</h4>
-          <p>Purdue University · Daniels School</p>
-          <time>2020 – 2024</time>
-        </div>
-      </div>
-    </section>
-
-    <!-- ━━━━━━━━━━━ CONTACT ━━━━━━━━━━━ -->
-    <section class="contact" id="contact">
-      <div class="contact__inner reveal">
-        <h2>Let's talk.</h2>
-        <p>Open to analytics, consulting, product, and strategy&nbsp;roles.</p>
-        <div class="contact__links">
-          <a href="mailto:jringler@utexas.edu">jringler@utexas.edu</a>
-          <a href="https://linkedin.com/in/joshuaringler" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/jringler30" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <footer class="ft">
-    <span>&copy; 2025 Joshua Ringler</span>
+    <div class="container ft__inner">
+      <span>&copy; 2025 Joshua Ringler</span>
+    </div>
   </footer>
 
-  <!-- Minimal JS: intersection observer for reveal animations -->
+  <!-- ============ MODAL ============ -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal__close" id="modalClose" aria-label="Close modal" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal__img">
+        <img id="modalImg" src="" alt="" />
+      </div>
+      <div class="modal__body">
+        <h3 id="modalTitle" class="modal__title"></h3>
+        <p id="modalDesc" class="modal__desc"></p>
+        <ul id="modalStack" class="modal__stack"></ul>
+        <a id="modalLink" href="#" class="btn" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast" id="toast" role="status" aria-live="polite">Email copied!</div>
+
+  <!-- ============ JS ============ -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    });
+    (() => {
+      /* --- Theme toggle --- */
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('themeToggle');
+      const saved = localStorage.getItem('theme');
+      if (saved) html.dataset.theme = saved;
+      else if (matchMedia('(prefers-color-scheme: dark)').matches) html.dataset.theme = 'dark';
+
+      themeBtn.addEventListener('click', () => {
+        const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+        html.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+
+      /* --- Smooth scroll --- */
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const id = a.getAttribute('href');
+          if (id === '#') return;
+          const el = document.querySelector(id);
+          if (!el) return;
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      /* --- Active nav on scroll --- */
+      const navLinks = document.querySelectorAll('[data-nav]');
+      const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+      const navIO = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            const match = [...navLinks].find(l => l.getAttribute('href') === '#' + entry.target.id);
+            if (match) match.classList.add('active');
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '-80px 0px -40% 0px' });
+      sections.forEach(s => navIO.observe(s));
+
+      /* --- Reveal on scroll --- */
+      const revealIO = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+      /* --- Filter chips --- */
+      const chips = document.querySelectorAll('.chip[data-filter]');
+      const cards = document.querySelectorAll('.card[data-tags]');
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const f = chip.dataset.filter;
+          cards.forEach(card => {
+            if (f === 'all' || card.dataset.tags.includes(f)) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      /* --- Modal --- */
+      const backdrop = document.getElementById('modalBackdrop');
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalStack = document.getElementById('modalStack');
+      const modalLink = document.getElementById('modalLink');
+      const modalClose = document.getElementById('modalClose');
+      let lastFocused = null;
+
+      function openModal(card) {
+        lastFocused = document.activeElement;
+        modalTitle.textContent = card.dataset.title;
+        modalDesc.textContent = card.dataset.desc;
+        modalImg.src = card.dataset.img;
+        modalImg.alt = card.dataset.title + ' screenshot';
+        modalLink.href = card.dataset.link;
+        modalStack.innerHTML = card.dataset.stack.split(', ').map(s => `<li>${s}</li>`).join('');
+        backdrop.classList.add('open');
+        backdrop.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        modalClose.focus();
+      }
+
+      function closeModal() {
+        backdrop.classList.remove('open');
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocused) lastFocused.focus();
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => openModal(card));
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); } });
+      });
+
+      modalClose.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+      });
+
+      /* Focus trap inside modal */
+      modal.addEventListener('keydown', e => {
+        if (e.key !== 'Tab') return;
+        const focusable = modal.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+
+      /* --- Copy email --- */
+      const copyBtn = document.getElementById('copyEmail');
+      const toast = document.getElementById('toast');
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('jringler@utexas.edu').then(() => {
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2200);
+        });
+      });
+
+    })();
   </script>
 
 </body>
