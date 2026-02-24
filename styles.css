@@ -387,6 +387,14 @@ button { font-family: inherit; cursor: pointer; }
   margin-bottom: 6px;
 }
 
+.card__impact {
+  font-size: .84rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+}
+
 .card__desc {
   font-size: .86rem; line-height: 1.6;
   color: var(--ink-3);
