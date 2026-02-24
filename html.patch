@@ -1,0 +1,158 @@
+diff --git a/index.html b/index.html
+index 29ad585e533cad64ba8d64689d80895487dc796f..2141a118f5813a71e6acf9c5fa32d58c780c5927 100644
+--- a/index.html
++++ b/index.html
+@@ -274,50 +274,54 @@
+ 
+     <!-- ============ SKILLS ============ -->
+     <section class="section" id="skills">
+       <div class="container">
+         <header class="section__head">
+           <span class="label">Capabilities</span>
+           <h2>What I work with.</h2>
+         </header>
+ 
+         <div class="skills reveal">
+           <div class="skills__col">
+             <h3>Languages</h3>
+             <ul><li>Python</li><li>SQL</li><li>R</li></ul>
+           </div>
+           <div class="skills__col">
+             <h3>Analytics &amp; ML</h3>
+             <ul><li>Machine Learning</li><li>Optimization</li><li>Statistical Modeling</li><li>NLP</li><li>Data Visualization</li></ul>
+           </div>
+           <div class="skills__col">
+             <h3>Infrastructure &amp; Tools</h3>
+             <ul><li>Streamlit</li><li>Snowflake</li><li>GitHub</li><li>Jupyter</li><li>Tableau</li></ul>
+           </div>
+         </div>
+ 
+         <!-- Education inline -->
++        <header class="section__head">
++          <span class="label">EDUCATION</span>
++          <h2>Education.</h2>
++        </header>
+         <div class="edu reveal">
+           <div class="edu__item">
+             <h4>MS Business Analytics</h4>
+             <p>UT Austin · McCombs — Financial Analytics Track · <time>Jul 2025 – May 2026</time></p>
+           </div>
+           <div class="edu__item">
+             <h4>BS Business Analytics &amp; Info Management</h4>
+             <p>Purdue University · Daniels — <time>Aug 2021 – May 2025</time></p>
+           </div>
+         </div>
+       </div>
+     </section>
+ 
+     <!-- ============ CONTACT ============ -->
+     <section class="section section--alt" id="contact">
+       <div class="container contact">
+         <header class="section__head">
+           <span class="label">Contact</span>
+           <h2>Let's talk.</h2>
+         </header>
+         <p class="contact__sub">Open to analytics, consulting, product, and strategy roles.</p>
+         <div class="contact__row">
+           <div class="contact__email-group">
+             <a href="mailto:jringler@utexas.edu" class="contact__link">jringler@utexas.edu</a>
+             <button class="copy-btn" id="copyEmail" type="button" aria-label="Copy email address">
+@@ -541,66 +545,75 @@
+ 
+       function getCurrentIdx() {
+         const scrollLeft = htlTrack.scrollLeft;
+         let idx = 0;
+         htlCards.forEach((card, i) => {
+           if (scrollLeft >= card.offsetLeft - htlTrack.offsetLeft - 40) idx = i;
+         });
+         return idx;
+       }
+ 
+       htlPrev.addEventListener('click', () => scrollToCard(Math.max(0, getCurrentIdx() - 1)));
+       htlNext.addEventListener('click', () => scrollToCard(Math.min(htlCount - 1, getCurrentIdx() + 1)));
+ 
+       htlTrack.addEventListener('scroll', updateHTL, { passive: true });
+ 
+       // Keyboard navigation on track
+       htlTrack.addEventListener('keydown', e => {
+         if (e.key === 'ArrowRight') { e.preventDefault(); scrollToCard(Math.min(htlCount - 1, getCurrentIdx() + 1)); }
+         if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToCard(Math.max(0, getCurrentIdx() - 1)); }
+       });
+ 
+       // Initial state
+       updateHTL();
+ 
+       /* --- Mobile tap-to-toggle tooltip (bottom-sheet with backdrop) --- */
+-      const isTouchDevice = matchMedia('(hover: none) and (pointer: coarse)').matches;
++      const mobileTipQuery = matchMedia('(max-width: 768px), (hover: none) and (pointer: coarse)');
+       const htlBackdrop = document.getElementById('htlBackdrop');
+ 
+       function closeAllTips() {
+         htlCards.forEach(c => c.classList.remove('tip-open'));
+         if (htlBackdrop) htlBackdrop.classList.remove('visible');
+         document.body.style.overflow = '';
+       }
+ 
+-      if (isTouchDevice) {
+-        htlCards.forEach(card => {
+-          card.addEventListener('click', e => {
+-            e.stopPropagation();
+-            const wasOpen = card.classList.contains('tip-open');
+-            closeAllTips();
+-            if (!wasOpen) {
+-              card.classList.add('tip-open');
+-              if (htlBackdrop) htlBackdrop.classList.add('visible');
+-              document.body.style.overflow = 'hidden';
+-            }
+-          });
++      htlCards.forEach(card => {
++        card.addEventListener('click', e => {
++          if (!mobileTipQuery.matches) return;
++          e.stopPropagation();
++          const wasOpen = card.classList.contains('tip-open');
++          closeAllTips();
++          if (!wasOpen) {
++            card.classList.add('tip-open');
++            if (htlBackdrop) htlBackdrop.classList.add('visible');
++            document.body.style.overflow = 'hidden';
++          }
+         });
++      });
++
++      // Tap backdrop closes bottom-sheet
++      if (htlBackdrop) {
++        htlBackdrop.addEventListener('click', closeAllTips);
++      }
+ 
+-        // Tap backdrop closes bottom-sheet
+-        if (htlBackdrop) {
+-          htlBackdrop.addEventListener('click', closeAllTips);
++      // Tap outside closes tooltip (mobile only)
++      document.addEventListener('click', e => {
++        if (!mobileTipQuery.matches) return;
++        if (!e.target.closest('.htl-card') && !e.target.closest('.htl-tip')) {
++          closeAllTips();
+         }
++      });
+ 
+-        // Tap outside closes tooltip
+-        document.addEventListener('click', e => {
+-          if (!e.target.closest('.htl-card') && !e.target.closest('.htl-tip')) {
+-            closeAllTips();
+-          }
+-        });
+-      }
++      // ESC closes any open mobile bottom-sheet
++      document.addEventListener('keydown', e => {
++        if (e.key === 'Escape' && mobileTipQuery.matches) closeAllTips();
++      });
++
++      mobileTipQuery.addEventListener('change', () => {
++        if (!mobileTipQuery.matches) closeAllTips();
++      });
+ 
+     })();
+   </script>
+ 
+ </body>
+ </html>

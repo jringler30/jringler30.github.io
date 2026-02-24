@@ -1,0 +1,530 @@
+diff --git a/styles.css b/styles.css
+index fe6b7ff9511483f8b2d22a980f22ef8601ac3630..26d1951f6bf7cd475157dca8f9b88dc5a0de905c 100644
+--- a/styles.css
++++ b/styles.css
+@@ -209,55 +209,56 @@ button { font-family: inherit; cursor: pointer; }
+   font-size: .72rem; font-weight: 600;
+   letter-spacing: .14em; text-transform: uppercase;
+   color: var(--accent);
+   margin-bottom: var(--sp-md);
+ }
+ 
+ .hero__name {
+   font-family: var(--serif); font-weight: 300;
+   font-size: clamp(48px, 8.5vw, 96px);
+   line-height: .95; letter-spacing: -.025em;
+   color: var(--ink);
+   margin-bottom: var(--sp-lg);
+ }
+ 
+ .hero__pitch {
+   font-size: clamp(.92rem, 1.6vw, 1.06rem);
+   line-height: 1.72; color: var(--ink-2);
+   max-width: 520px;
+   margin-bottom: var(--sp-xl);
+ }
+ 
+ .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+ 
+ .hero__photo {
+   position: relative;
+-  border-radius: var(--rad);
++  border-radius: calc(var(--rad) + 4px);
+   overflow: hidden;
+   aspect-ratio: 1 / 1;
+   max-width: 380px;
+   justify-self: end;
++  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+ }
+ .hero__photo img {
+   width: 100%; height: 100%;
+   object-fit: cover;
+   border-radius: var(--rad);
+ }
+ .hero__photo::after {
+   content: ''; position: absolute; inset: 0;
+   border-radius: var(--rad);
+   border: 1px solid var(--rule);
+   pointer-events: none;
+ }
+ 
+ /* stagger entrance */
+ .anim {
+   opacity: 0; transform: translateY(20px);
+   animation: rise .65s var(--ease) both;
+   animation-delay: calc(var(--i) * .13s + .15s);
+ }
+ @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+ 
+ /* ═══════════ SECTIONS ═══════════ */
+ .section { padding: var(--sp-3xl) 0; }
+ .section--alt { background: var(--bg-alt); transition: background .35s; }
+ 
+@@ -309,91 +310,101 @@ button { font-family: inherit; cursor: pointer; }
+   gap: var(--sp-lg);
+ }
+ 
+ .card {
+   background: var(--surface);
+   border: 1px solid var(--rule);
+   border-radius: var(--rad);
+   overflow: hidden;
+   cursor: pointer;
+   box-shadow: var(--card-shadow);
+   transition: box-shadow .35s var(--ease), transform .35s var(--ease), border-color .3s, opacity .4s, background .35s;
+ }
+ .card:hover {
+   box-shadow: var(--card-hover);
+   transform: translateY(-5px);
+   border-color: var(--accent);
+ }
+ .card.hidden {
+   display: none;
+ }
+ 
+ .card__img {
+   aspect-ratio: 16 / 10;
+   overflow: hidden;
+   background: var(--bg-alt);
++  border-bottom: 1px solid var(--rule);
+ }
+ .card__img img {
+   width: 100%; height: 100%;
+   object-fit: cover;
+-  transition: transform .45s var(--ease);
++  transition: transform .45s var(--ease), filter .3s var(--ease);
+ }
+-.card:hover .card__img img { transform: scale(1.04); }
++.card:hover .card__img img { transform: scale(1.04); filter: saturate(1.02); }
+ 
+ .card__body { padding: var(--sp-lg); }
+ 
++
+ .card__title {
+   font-family: var(--serif);
+   font-size: 1.1rem; font-weight: 500;
+   color: var(--ink); line-height: 1.3;
+   margin-bottom: 6px;
+ }
+ 
+ .card__desc {
+   font-size: .86rem; line-height: 1.6;
+   color: var(--ink-3);
+   margin-bottom: 12px;
+ }
+ 
+ .card__tags {
+   list-style: none;
+   display: flex; flex-wrap: wrap; gap: 5px;
+ }
+ .card__tags li {
+   font-size: .68rem; font-weight: 600;
+   letter-spacing: .04em;
+   padding: 3px 10px;
+   border-radius: 100px;
+   border: 1px solid var(--rule);
+   color: var(--ink-4);
+   transition: border-color .25s;
+ }
+ 
++
++
++#experience,
++#experience .container {
++  overflow: visible;
++}
++
+ /* ═══════════ HORIZONTAL TIMELINE ═══════════ */
+ .htl-wrap {
+   position: relative;
+   padding: 0 0 var(--sp-2xl);
++  overflow: visible;
+ }
+ 
+ /* Controls row (indicator + arrows) */
+ .htl-controls {
+   max-width: var(--mw); margin: 0 auto;
+   padding: 0 var(--gutter) var(--sp-lg);
+   display: flex; align-items: center; justify-content: space-between;
+ }
+ 
+ .htl-indicator {
+   font-size: .78rem; font-weight: 600;
+   letter-spacing: .06em; color: var(--ink-4);
+ }
+ 
+ .htl-arrows { display: flex; gap: 8px; }
+ 
+ .htl-arrow {
+   width: 40px; height: 40px;
+   display: flex; align-items: center; justify-content: center;
+   border: 1.5px solid var(--rule);
+   border-radius: 50%;
+   background: var(--surface);
+   color: var(--ink-3);
+   transition: all .25s var(--ease);
+ }
+@@ -407,89 +418,92 @@ button { font-family: inherit; cursor: pointer; }
+   padding: 0 var(--gutter);
+   margin-bottom: var(--sp-lg);
+ }
+ .htl-progress__fill {
+   height: 2px;
+   background: var(--accent);
+   border-radius: 2px;
+   width: 25%;
+   transition: width .35s var(--ease);
+ }
+ 
+ /* Rail line with dots */
+ .htl-rail {
+   position: absolute;
+   top: 0; left: 0; right: 0;
+   pointer-events: none;
+   /* The rail is positioned inside the track area — we offset it */
+   display: none; /* shown via JS positioning; using the track-relative approach below instead */
+ }
+ 
+ /* We draw the rail INSIDE the track using a pseudo-element */
+ .htl-track {
+   display: flex;
+   gap: 24px;
+   overflow-x: auto;
++  overflow-y: visible;
+   scroll-snap-type: x mandatory;
+   scroll-behavior: smooth;
+   -webkit-overflow-scrolling: touch;
+-  padding: 48px var(--gutter) 32px;
++  padding: 70px var(--gutter) 32px;
+   max-width: var(--mw);
+   margin: 0 auto;
+   position: relative;
++  isolation: isolate;
+ 
+   /* Visible styled scrollbar */
+   scrollbar-width: thin;
+   scrollbar-color: var(--ink-4) transparent;
+ }
+ .htl-track::-webkit-scrollbar { height: 6px; }
+ .htl-track::-webkit-scrollbar-track { background: transparent; }
+ .htl-track::-webkit-scrollbar-thumb {
+   background: var(--ink-4);
+   border-radius: 4px;
+ }
+ .htl-track::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+ 
+ /* Rail line drawn behind cards — uses a tall inline element to span full scroll width */
+ .htl-track::before {
+   content: '';
+   position: absolute;
+   top: 22px;
+   left: 0;
+   width: 100%;
+   /* Stretch to full scrollable width */
+   min-width: calc(100% + 1px);
+   height: 2px;
+   background: var(--rule);
+   z-index: 0;
+   pointer-events: none;
+ }
+ 
+ /* Card */
+ .htl-card {
+   flex: 0 0 clamp(260px, 30vw, 320px);
+   scroll-snap-align: start;
++  scroll-snap-stop: always;
+   background: var(--surface);
+   border: 1px solid var(--rule);
+   border-radius: var(--rad);
+   padding: var(--sp-lg);
+   position: relative;
+   z-index: 1;
+   cursor: default;
+   transition: box-shadow .3s var(--ease), transform .3s var(--ease), border-color .3s;
+ }
+ .htl-card:hover,
+ .htl-card:focus-visible {
+   box-shadow: var(--card-hover);
+   transform: translateY(-4px);
+   border-color: var(--accent);
+ }
+ 
+ /* Dot above each card — sits ON the rail line */
+ .htl-card::before {
+   content: '';
+   position: absolute;
+   top: -34px; left: 28px;
+   width: 14px; height: 14px;
+   border-radius: 50%;
+   border: 2.5px solid var(--accent);
+   background: var(--bg-alt);
+@@ -522,129 +536,203 @@ button { font-family: inherit; cursor: pointer; }
+   display: block;
+   font-size: .7rem; font-weight: 700;
+   letter-spacing: .08em; text-transform: uppercase;
+   color: var(--accent);
+   margin-bottom: 8px;
+ }
+ 
+ .htl-card__role {
+   font-family: var(--serif);
+   font-size: 1.05rem; font-weight: 500;
+   color: var(--ink); line-height: 1.3;
+   margin-bottom: 2px;
+ }
+ 
+ .htl-card__co {
+   font-size: .82rem; font-weight: 500;
+   color: var(--ink-4);
+   margin-bottom: 8px;
+ }
+ 
+ .htl-card__desc {
+   font-size: .86rem; line-height: 1.6;
+   color: var(--ink-3);
+ }
+ 
+-/* ═══════ TOOLTIP — rendered as expandable panel inside card ═══════ */
++/* ═══════ TOOLTIP — floating on desktop / bottom-sheet on mobile ═══════ */
+ .htl-tip {
+-  margin-top: 12px;
+-  padding-top: 12px;
+-  border-top: 1px solid var(--rule);
+-  max-height: 0;
+-  overflow: hidden;
++  position: absolute;
++  left: 0;
++  bottom: calc(100% + 14px);
++  width: min(360px, calc(100vw - (var(--gutter) * 2)));
++  background: var(--surface);
++  border: 1px solid var(--rule);
++  border-radius: var(--rad);
++  box-shadow: var(--card-hover);
++  padding: 12px;
+   opacity: 0;
+-  transition: max-height .35s var(--ease), opacity .25s var(--ease), padding .25s;
++  visibility: hidden;
++  transform: translateY(8px);
++  transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s;
+   pointer-events: none;
++  z-index: 1200;
++}
++
++.htl-tip::after {
++  content: '';
++  position: absolute;
++  left: 24px;
++  top: 100%;
++  width: 10px;
++  height: 10px;
++  background: var(--surface);
++  border-right: 1px solid var(--rule);
++  border-bottom: 1px solid var(--rule);
++  transform: rotate(45deg) translateY(-3px);
+ }
+ 
+-/* Show on hover (desktop) */
++/* Show on hover/focus (desktop) */
+ .htl-card:hover .htl-tip,
++.htl-card:focus-within .htl-tip,
+ .htl-card:focus-visible .htl-tip {
+-  max-height: 300px;
+   opacity: 1;
++  visibility: visible;
++  transform: translateY(0);
+   pointer-events: auto;
+ }
+ 
+ /* Show when tapped (mobile — toggled via JS) */
+ .htl-card.tip-open .htl-tip {
+-  max-height: 300px;
+   opacity: 1;
++  visibility: visible;
++  transform: translateY(0);
+   pointer-events: auto;
+ }
+ 
+ .htl-tip__heading {
+   font-size: .7rem; font-weight: 700;
+   letter-spacing: .08em; text-transform: uppercase;
+   color: var(--accent);
+   margin-bottom: 8px;
+ }
+ 
+ .htl-tip__tools {
+   list-style: none;
+   display: flex; flex-wrap: wrap; gap: 5px;
+   margin-bottom: 10px;
+ }
+ .htl-tip__tools li {
+   font-size: .68rem; font-weight: 600;
+   padding: 3px 9px;
+   border: 1px solid var(--rule);
+   border-radius: 100px;
+   color: var(--ink-3);
+ }
+ 
+ .htl-tip__bullets {
+   list-style: none;
+ }
+ .htl-tip__bullets li {
+   font-size: .82rem; line-height: 1.55;
+   color: var(--ink-2);
+   padding-left: 14px;
+   position: relative;
+   margin-bottom: 4px;
+ }
+ .htl-tip__bullets li::before {
+   content: ''; position: absolute;
+   left: 0; top: 8px;
+   width: 5px; height: 5px;
+   border-radius: 50%;
+   background: var(--accent); opacity: .45;
+ }
+ 
+-/* Mobile: only show tooltip on tap, not hover */
+-@media (max-width: 600px) {
++/* Mobile: bottom-sheet tooltip */
++@media (max-width: 768px), (hover: none) and (pointer: coarse) {
++  .htl-track {
++    overflow-y: hidden;
++  }
++
++  .htl-card .htl-tip {
++    position: fixed;
++    left: 0;
++    right: 0;
++    bottom: 0;
++    width: 100%;
++    max-height: min(62vh, 420px);
++    overflow-y: auto;
++    border-radius: 14px 14px 0 0;
++    border-left: none;
++    border-right: none;
++    border-bottom: none;
++    padding: 16px 20px 22px;
++    transform: translateY(100%);
++    z-index: 950;
++  }
++
++  .htl-card .htl-tip::after {
++    display: none;
++  }
++
+   .htl-card:hover .htl-tip,
++  .htl-card:focus-within .htl-tip,
+   .htl-card:focus-visible .htl-tip {
+-    max-height: 0; opacity: 0;
++    opacity: 0;
++    visibility: hidden;
++    transform: translateY(100%);
++    pointer-events: none;
+   }
++
+   .htl-card.tip-open .htl-tip {
+-    max-height: 300px; opacity: 1;
++    opacity: 1;
++    visibility: visible;
++    transform: translateY(0);
++    pointer-events: auto;
+   }
+ }
+ 
+ /* Rail dots are decorative HTML elements — hidden since we use card::before for dot rendering */
+ .htl-rail { display: none; }
+ 
++
++/* Backdrop for mobile bottom-sheet */
++.htl-backdrop {
++  position: fixed;
++  inset: 0;
++  background: var(--modal-bg);
++  opacity: 0;
++  visibility: hidden;
++  pointer-events: none;
++  transition: opacity .25s var(--ease), visibility .25s;
++  z-index: 900;
++}
++.htl-backdrop.visible {
++  opacity: 1;
++  visibility: visible;
++  pointer-events: auto;
++}
++
+ /* ═══════════ SKILLS ═══════════ */
+ .skills {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: var(--sp-2xl);
+   padding-bottom: var(--sp-2xl);
+   border-bottom: 1px solid var(--rule);
+   margin-bottom: var(--sp-2xl);
+ }
+ 
+ .skills__col h3 {
+   font-family: var(--serif);
+   font-size: 1rem; font-weight: 500;
+   color: var(--ink);
+   margin-bottom: var(--sp-md);
+   padding-bottom: 8px;
+   border-bottom: 1.5px solid var(--rule);
+ }
+ 
+ .skills__col ul {
+   list-style: none;
+   display: flex; flex-direction: column; gap: 6px;
+ }
+ .skills__col li {
+   font-size: .88rem; color: var(--ink-2);
+@@ -808,50 +896,51 @@ button { font-family: inherit; cursor: pointer; }
+ }
+ 
+ /* ═══════════ FOOTER ═══════════ */
+ .ft { border-top: 1px solid var(--rule); padding: var(--sp-lg) 0; transition: border-color .35s; }
+ .ft__inner { font-size: .76rem; color: var(--ink-4); }
+ 
+ /* ═══════════ SCROLL REVEAL ═══════════ */
+ .reveal {
+   opacity: 0; transform: translateY(28px);
+   transition: opacity .6s var(--ease), transform .6s var(--ease);
+ }
+ .reveal.in { opacity: 1; transform: translateY(0); }
+ 
+ /* ═══════════ REDUCED MOTION ═══════════ */
+ @media (prefers-reduced-motion: reduce) {
+   *, *::before, *::after {
+     animation-duration: 0.01ms !important;
+     animation-iteration-count: 1 !important;
+     transition-duration: 0.01ms !important;
+     scroll-behavior: auto !important;
+   }
+   .anim { opacity: 1; transform: none; }
+   .reveal { opacity: 1; transform: none; }
+   .htl-track { scroll-behavior: auto; }
+   .htl-tip { transition: none; }
++  .htl-tip::after { transition: none; }
+   .htl-card { transition: none; }
+   .htl-card::before, .htl-card::after { transition: none; }
+   .htl-progress__fill { transition: none; }
+   .htl-backdrop { transition: none; }
+ }
+ 
+ /* ═══════════ RESPONSIVE — ≤ 900px ═══════════ */
+ @media (max-width: 900px) {
+   .hero__grid {
+     grid-template-columns: 1fr;
+     gap: var(--sp-xl);
+   }
+   .hero__photo {
+     max-width: 280px;
+     justify-self: start;
+     order: -1;
+   }
+   .hero { min-height: auto; padding-top: calc(var(--navH) + var(--sp-xl)); padding-bottom: var(--sp-2xl); }
+ 
+   .projects { grid-template-columns: 1fr; }
+ 
+   .skills { grid-template-columns: 1fr 1fr; gap: var(--sp-lg); }
+   .edu { grid-template-columns: 1fr; gap: var(--sp-lg); }
+ }
+ 
