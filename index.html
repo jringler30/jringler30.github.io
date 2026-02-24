@@ -90,6 +90,7 @@
             </div>
             <div class="card__body">
               <h3 class="card__title">Portfolio TLH Optimizer</h3>
+              <p class="card__impact">Improves after-tax returns with automated tax-aware rebalancing.</p>
               <p class="card__desc">Tax-loss harvesting engine with scenario analysis and interactive KPI reporting via Streamlit.</p>
               <ul class="card__tags" aria-label="Technologies">
                 <li>Python</li><li>Streamlit</li><li>Optimization</li>
@@ -109,6 +110,7 @@
             </div>
             <div class="card__body">
               <h3 class="card__title">Financial Analytics Toolkit</h3>
+              <p class="card__impact">Compares rebalancing strategies to quantify risk/return tradeoffs.</p>
               <p class="card__desc">Portfolio return calculator with factor decomposition and interactive Plotly dashboards.</p>
               <ul class="card__tags" aria-label="Technologies">
                 <li>Python</li><li>Analytics</li><li>Dashboard</li>
@@ -128,6 +130,7 @@
             </div>
             <div class="card__body">
               <h3 class="card__title">ML &amp; NLP Research</h3>
+              <p class="card__impact">Evaluates factor strategies with clean pipelines and reproducible results.</p>
               <p class="card__desc">Earnings call NLP, sentiment analysis, and applied ML spanning classification to deep learning.</p>
               <ul class="card__tags" aria-label="Technologies">
                 <li>PyTorch</li><li>scikit-learn</li><li>ML/NLP</li>
@@ -147,6 +150,7 @@
             </div>
             <div class="card__body">
               <h3 class="card__title">Email Network Scraper</h3>
+              <p class="card__impact">Trains self-play agents to improve win rate through reinforcement learning.</p>
               <p class="card__desc">Selenium scraper with community detection on bipartite email communication graphs.</p>
               <ul class="card__tags" aria-label="Technologies">
                 <li>Selenium</li><li>NetworkX</li><li>Network</li>
@@ -329,7 +333,7 @@
         <p class="contact__sub">Open to analytics, consulting, product, and strategy roles.</p>
         <div class="contact__row">
           <div class="contact__email-group">
-            <a href="mailto:jringler@utexas.edu" class="contact__link">jringler@utexas.edu</a>
+            <a href="/cdn-cgi/l/email-protection#d8b2aab1b6bfb4bdaa98adacbda0b9abf6bdbcad" class="contact__link"><span class="__cf_email__" data-cfemail="68021a01060f040d1a281d1c0d10091b460d0c1d">[email&#160;protected]</span></a>
             <button class="copy-btn" id="copyEmail" type="button" aria-label="Copy email address">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               <span>Copy</span>
@@ -370,7 +374,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite">Email copied!</div>
 
   <!-- ============ JS ============ -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     (() => {
       /* --- Theme toggle --- */
       const html = document.documentElement;
@@ -611,15 +615,3 @@
 
       // ESC closes any open mobile bottom-sheet
       document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && mobileTipQuery.matches) closeAllTips();
-      });
-
-      mobileTipQuery.addEventListener('change', () => {
-        if (!mobileTipQuery.matches) closeAllTips();
-      });
-
-    })();
-  </script>
-
-</body>
-</html>
