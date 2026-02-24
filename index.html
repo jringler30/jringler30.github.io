@@ -627,3 +627,15 @@
 
       // ESC closes any open mobile bottom-sheet
       document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && mobileTipQuery.matches) closeAllTips();
+      });
+
+      mobileTipQuery.addEventListener('change', () => {
+        if (!mobileTipQuery.matches) closeAllTips();
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
