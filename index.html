@@ -159,41 +159,114 @@
           <span class="label">Experience</span>
           <h2>Where I've worked.</h2>
         </header>
+      </div>
 
-        <ol class="timeline" role="list">
-          <li class="tl reveal">
-            <time>2024 – 2025</time>
-            <div>
-              <h3>Graduate Capstone Consultant</h3>
-              <p class="tl__co">Vise</p>
-              <p>Designed portfolio optimization and tax-loss harvesting systems for an automated investment platform. Built analytical engines, decision logic, and client-facing Streamlit tools.</p>
+      <!-- Horizontal timeline — full-bleed, scroll-snap -->
+      <div class="htl-wrap">
+        <div class="htl-controls">
+          <span class="htl-indicator" id="htlIndicator">1 / 4</span>
+          <div class="htl-arrows">
+            <button class="htl-arrow" id="htlPrev" type="button" aria-label="Previous role">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="htl-arrow" id="htlNext" type="button" aria-label="Next role">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="htl-progress"><div class="htl-progress__fill" id="htlProgress"></div></div>
+
+        <!-- Rail line + dot markers (visual only) -->
+        <div class="htl-rail" aria-hidden="true">
+          <span class="htl-dot"></span>
+          <span class="htl-dot"></span>
+          <span class="htl-dot"></span>
+          <span class="htl-dot"></span>
+        </div>
+
+        <!-- Scrollable track -->
+        <div class="htl-track" id="htlTrack" role="list" tabindex="0" aria-label="Experience timeline">
+
+          <article class="htl-card" role="listitem" tabindex="0"
+            aria-describedby="tip-vise"
+            data-tools="Streamlit, GitHub, Python, Optimization"
+            data-bullets="Built TLH optimization engine with scenario analysis and constraint handling|Developed client-facing Streamlit dashboards deployed in production|Designed decision logic for automated portfolio rebalancing">
+            <time class="htl-card__date">Jan 2026 – Present</time>
+            <h3 class="htl-card__role">Graduate Capstone Business Consultant</h3>
+            <p class="htl-card__co">Vise</p>
+            <p class="htl-card__desc">Portfolio optimization and tax-loss harvesting systems for an automated investment platform.</p>
+            <!-- Tooltip (hidden by default) -->
+            <div class="htl-tip" id="tip-vise" role="tooltip">
+              <p class="htl-tip__heading">Tools &amp; Impact</p>
+              <ul class="htl-tip__tools"><li>Streamlit</li><li>GitHub</li><li>Python</li><li>Optimization</li></ul>
+              <ul class="htl-tip__bullets">
+                <li>Built TLH optimization engine with scenario analysis and constraint handling</li>
+                <li>Developed client-facing Streamlit dashboards deployed in production</li>
+                <li>Designed decision logic for automated portfolio rebalancing</li>
+              </ul>
             </div>
-          </li>
-          <li class="tl reveal">
-            <time>2024</time>
-            <div>
-              <h3>Business Analyst Intern</h3>
-              <p class="tl__co">Bell Flight</p>
-              <p>Strategic analysis and operational decision-making through data modeling, KPI development, and cross-functional reporting for aviation programs.</p>
+          </article>
+
+          <article class="htl-card" role="listitem" tabindex="0"
+            aria-describedby="tip-purdue"
+            data-tools="NLP, Python, Text Classification"
+            data-bullets="Applied NLP to unstructured text classification and pattern extraction|Awarded 1st place at Purdue undergraduate research exposition|Built reproducible analysis pipelines for large text corpora">
+            <time class="htl-card__date">Aug – Dec 2024</time>
+            <h3 class="htl-card__role">NLP Research</h3>
+            <p class="htl-card__co">Purdue University · Daniels School</p>
+            <p class="htl-card__desc">Unstructured text classification and pattern extraction. 1st place research exposition.</p>
+            <div class="htl-tip" id="tip-purdue" role="tooltip">
+              <p class="htl-tip__heading">Tools &amp; Impact</p>
+              <ul class="htl-tip__tools"><li>NLP</li><li>Python</li><li>Text Classification</li></ul>
+              <ul class="htl-tip__bullets">
+                <li>Applied NLP to unstructured text classification and pattern extraction</li>
+                <li>Awarded 1st place at Purdue undergraduate research exposition</li>
+                <li>Built reproducible analysis pipelines for large text corpora</li>
+              </ul>
             </div>
-          </li>
-          <li class="tl reveal">
-            <time>2023</time>
-            <div>
-              <h3>Commercial Strategy &amp; Data Analyst</h3>
-              <p class="tl__co">Wayfair</p>
-              <p>Commercial analytics informing category strategy and pricing. Built SQL pipelines and visualization tools for merchandising leadership.</p>
+          </article>
+
+          <article class="htl-card" role="listitem" tabindex="0"
+            aria-describedby="tip-wayfair"
+            data-tools="SQL, Looker, Data Pipelines, Visualization"
+            data-bullets="Informed category strategy and pricing decisions through commercial analytics|Built SQL and Looker-based data pipelines for merchandising leadership|Surfaced actionable insights at scale across product categories">
+            <time class="htl-card__date">May – Aug 2024</time>
+            <h3 class="htl-card__role">Commercial Strategy Summer Data Analyst</h3>
+            <p class="htl-card__co">Wayfair</p>
+            <p class="htl-card__desc">Commercial analytics informing category strategy and pricing decisions.</p>
+            <div class="htl-tip" id="tip-wayfair" role="tooltip">
+              <p class="htl-tip__heading">Tools &amp; Impact</p>
+              <ul class="htl-tip__tools"><li>SQL</li><li>Looker</li><li>Data Pipelines</li></ul>
+              <ul class="htl-tip__bullets">
+                <li>Informed category strategy and pricing decisions through commercial analytics</li>
+                <li>Built SQL and Looker-based data pipelines for merchandising leadership</li>
+                <li>Surfaced actionable insights at scale across product categories</li>
+              </ul>
             </div>
-          </li>
-          <li class="tl reveal">
-            <time>2022 – 2024</time>
-            <div>
-              <h3>NLP Research</h3>
-              <p class="tl__co">Purdue University</p>
-              <p>NLP on unstructured text classification. Awarded <strong>first place</strong> at Purdue's undergraduate research exposition.</p>
+          </article>
+
+          <article class="htl-card" role="listitem" tabindex="0"
+            aria-describedby="tip-bell"
+            data-tools="Power BI, Visio, Data Modeling, KPI Design"
+            data-bullets="Strategic analysis and operational decision-making for aviation programs|Data modeling with Power BI and Visio for cross-functional reporting|Developed KPI frameworks tracking program-level performance">
+            <time class="htl-card__date">May – Aug 2023</time>
+            <h3 class="htl-card__role">Summer Business Analyst</h3>
+            <p class="htl-card__co">Bell Flight</p>
+            <p class="htl-card__desc">Operational decision-making through data modeling, KPI development, and cross-functional reporting.</p>
+            <div class="htl-tip" id="tip-bell" role="tooltip">
+              <p class="htl-tip__heading">Tools &amp; Impact</p>
+              <ul class="htl-tip__tools"><li>Power BI</li><li>Visio</li><li>Data Modeling</li></ul>
+              <ul class="htl-tip__bullets">
+                <li>Strategic analysis and operational decision-making for aviation programs</li>
+                <li>Data modeling with Power BI and Visio for cross-functional reporting</li>
+                <li>Developed KPI frameworks tracking program-level performance</li>
+              </ul>
             </div>
-          </li>
-        </ol>
+          </article>
+
+        </div>
       </div>
     </section>
 
@@ -224,11 +297,11 @@
         <div class="edu reveal">
           <div class="edu__item">
             <h4>MS Business Analytics</h4>
-            <p>UT Austin · McCombs — <time>2024–2025</time></p>
+            <p>UT Austin · McCombs — Financial Analytics Track · <time>Jul 2025 – May 2026</time></p>
           </div>
           <div class="edu__item">
             <h4>BS Business Analytics &amp; Info Management</h4>
-            <p>Purdue University · Daniels — <time>2020–2024</time></p>
+            <p>Purdue University · Daniels — <time>Aug 2021 – May 2025</time></p>
           </div>
         </div>
       </div>
@@ -419,6 +492,96 @@
           setTimeout(() => toast.classList.remove('show'), 2200);
         });
       });
+
+      /* --- Horizontal Timeline --- */
+      const htlTrack = document.getElementById('htlTrack');
+      const htlPrev = document.getElementById('htlPrev');
+      const htlNext = document.getElementById('htlNext');
+      const htlProgress = document.getElementById('htlProgress');
+      const htlIndicator = document.getElementById('htlIndicator');
+      const htlCards = htlTrack.querySelectorAll('.htl-card');
+      const htlCount = htlCards.length;
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function getScrollBehavior() {
+        return reducedMotion ? 'auto' : 'smooth';
+      }
+
+      function updateHTL() {
+        const { scrollLeft, scrollWidth, clientWidth } = htlTrack;
+        const maxScroll = scrollWidth - clientWidth;
+        const ratio = maxScroll > 0 ? scrollLeft / maxScroll : 0;
+
+        // Progress bar
+        const pct = Math.max(((ratio * (htlCount - 1)) + 1) / htlCount * 100, 100 / htlCount);
+        htlProgress.style.width = pct + '%';
+
+        // Current index (based on snap position)
+        let currentIdx = 0;
+        htlCards.forEach((card, i) => {
+          const cardLeft = card.offsetLeft - htlTrack.offsetLeft;
+          if (scrollLeft >= cardLeft - 40) currentIdx = i;
+        });
+
+        htlIndicator.textContent = (currentIdx + 1) + ' / ' + htlCount;
+
+        // Arrow states
+        htlPrev.disabled = scrollLeft <= 2;
+        htlNext.disabled = scrollLeft >= maxScroll - 2;
+      }
+
+      function scrollToCard(idx) {
+        const card = htlCards[idx];
+        if (!card) return;
+        const offset = card.offsetLeft - htlTrack.offsetLeft - parseInt(getComputedStyle(htlTrack).paddingLeft);
+        htlTrack.scrollTo({ left: offset, behavior: getScrollBehavior() });
+      }
+
+      function getCurrentIdx() {
+        const scrollLeft = htlTrack.scrollLeft;
+        let idx = 0;
+        htlCards.forEach((card, i) => {
+          if (scrollLeft >= card.offsetLeft - htlTrack.offsetLeft - 40) idx = i;
+        });
+        return idx;
+      }
+
+      htlPrev.addEventListener('click', () => scrollToCard(Math.max(0, getCurrentIdx() - 1)));
+      htlNext.addEventListener('click', () => scrollToCard(Math.min(htlCount - 1, getCurrentIdx() + 1)));
+
+      htlTrack.addEventListener('scroll', updateHTL, { passive: true });
+
+      // Keyboard navigation on track
+      htlTrack.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); scrollToCard(Math.min(htlCount - 1, getCurrentIdx() + 1)); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToCard(Math.max(0, getCurrentIdx() - 1)); }
+      });
+
+      // Initial state
+      updateHTL();
+
+      /* --- Mobile tap-to-toggle tooltip --- */
+      const isTouchDevice = matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+      if (isTouchDevice) {
+        htlCards.forEach(card => {
+          card.addEventListener('click', e => {
+            e.stopPropagation();
+            const wasOpen = card.classList.contains('tip-open');
+            // Close all
+            htlCards.forEach(c => c.classList.remove('tip-open'));
+            // Toggle current
+            if (!wasOpen) card.classList.add('tip-open');
+          });
+        });
+
+        // Tap outside closes tooltip
+        document.addEventListener('click', e => {
+          if (!e.target.closest('.htl-card')) {
+            htlCards.forEach(c => c.classList.remove('tip-open'));
+          }
+        });
+      }
 
     })();
   </script>
