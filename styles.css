@@ -415,6 +415,71 @@ button { font-family: inherit; cursor: pointer; }
   transition: border-color .25s;
 }
 
+/* ═══════════ DASHBOARD SHOWCASE ═══════════ */
+.showcase { margin-top: var(--sp-2xl); }
+
+.showcase__sub {
+  font-size: .88rem; color: var(--ink-3);
+  margin-bottom: var(--sp-xl); line-height: 1.55;
+}
+
+.showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-lg);
+}
+
+.showcase__item {
+  border: 1px solid var(--rule);
+  border-radius: var(--rad);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--card-shadow);
+  transition: box-shadow .35s var(--ease), transform .35s var(--ease), border-color .3s, background .35s;
+  display: flex; flex-direction: column;
+  margin: 0;
+}
+.showcase__item:hover {
+  box-shadow: var(--card-hover);
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.showcase__img-wrap {
+  overflow: hidden;
+  background: var(--bg-alt);
+  line-height: 0;
+  transition: background .35s;
+}
+.showcase__img-wrap img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+  transition: transform .45s var(--ease), filter .3s var(--ease);
+}
+.showcase__item:hover .showcase__img-wrap img {
+  transform: scale(1.03);
+}
+
+.showcase__item figcaption {
+  padding: var(--sp-md) var(--sp-lg);
+  border-top: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: 4px;
+  flex: 1;
+  transition: border-color .35s;
+}
+.showcase__item figcaption strong {
+  font-size: .83rem; font-weight: 600; color: var(--ink);
+}
+.showcase__item figcaption span {
+  font-size: .78rem; color: var(--ink-3); line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .showcase__grid { grid-template-columns: 1fr; }
+}
 
 
 #experience,

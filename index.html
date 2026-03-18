@@ -143,11 +143,11 @@
             data-title="Email Network Scraper"
             data-desc="Selenium-based web scraper that extracts communication metadata from email archives, then applies community detection algorithms on bipartite graphs to reveal hidden organizational structure and communication patterns. Designed for large-scale network analysis research."
             data-stack="Selenium, NetworkX, Python, Graph Theory"
-            data-img="assets/images/gmail_icon.png"
+            data-img="assets/images/dashboard_network.png"
             data-link="https://github.com/jringler30/email-network-scraper"
             tabindex="0" role="button" aria-label="View Email Network Scraper details">
             <div class="card__img">
-              <img src="assets/images/gmail_icon.png" alt="Email network graph visualization" loading="lazy" />
+              <img src="assets/images/dashboard_network.png" alt="Jmail ego network explorer — 1,533 nodes, 102 communities" loading="lazy" />
             </div>
             <div class="card__body">
               <h3 class="card__title">Email Network Scraper</h3>
@@ -180,7 +180,85 @@
             </div>
           </article>
 
+          <article class="card" data-tags="dashboard"
+            data-title="Mini ERP — Order-to-Cash System"
+            data-desc="Full-stack ERP built from scratch in Python, SQLite, and Streamlit. Includes an OLTP transactional layer (9 tables, 4 dependency layers), a star-schema analytics layer (OLAP), and five reporting modules: Executive Overview KPIs, Sales Analytics, Order Operations, Inventory Monitoring, and an interactive Data Architecture reference. Also includes a Jmail email network intelligence module with ego-network exploration across 1,533 nodes and 102 communities."
+            data-stack="Python, SQLite, Streamlit, Plotly, NetworkX"
+            data-img="assets/images/dashboard_main.png"
+            data-link="https://github.com/jringler30/mini-erp-order-to-cash"
+            tabindex="0" role="button" aria-label="View Mini ERP System details">
+            <div class="card__img">
+              <img src="assets/images/dashboard_main.png" alt="Mini ERP Executive Overview — KPI dashboard showing revenue, orders, and status breakdown" loading="lazy" />
+            </div>
+            <div class="card__body">
+              <h3 class="card__title">Mini ERP — Order-to-Cash System</h3>
+              <p class="card__impact">End-to-end ERP from database design to live analytics dashboard.</p>
+              <p class="card__desc">Full-stack system: OLTP schema, star-schema OLAP layer, and 5 Streamlit reporting modules including KPIs, inventory, and email network intelligence.</p>
+              <ul class="card__tags" aria-label="Technologies">
+                <li>SQLite</li><li>Streamlit</li><li>Plotly</li><li>NetworkX</li>
+              </ul>
+            </div>
+          </article>
+
         </div>
+
+        <!-- ── Dashboard Showcase ── -->
+        <div class="showcase reveal">
+          <p class="label" style="margin-top:var(--sp-2xl)">Dashboard Showcase</p>
+          <p class="showcase__sub">Screenshots from the Mini ERP Order-to-Cash system — built end-to-end in Python, SQLite, and Streamlit.</p>
+          <div class="showcase__grid">
+
+            <figure class="showcase__item">
+              <div class="showcase__img-wrap">
+                <img src="assets/images/dashboard_main.png"
+                  alt="Mini ERP Executive Overview — KPI tiles for revenue, orders, and unpaid invoices with monthly trend chart"
+                  loading="lazy" />
+              </div>
+              <figcaption>
+                <strong>Executive Overview — KPI Dashboard</strong>
+                <span>High-level order-to-cash KPIs: revenue, order volume, unpaid invoices, and low-stock alerts with a monthly revenue trend and order-status breakdown.</span>
+              </figcaption>
+            </figure>
+
+            <figure class="showcase__item">
+              <div class="showcase__img-wrap">
+                <img src="assets/images/dashboard_network.png"
+                  alt="Jmail Email Network Intelligence — ego network explorer showing connections, betweenness, and community"
+                  loading="lazy" />
+              </div>
+              <figcaption>
+                <strong>Email Network Intelligence — Ego Explorer</strong>
+                <span>Interactive ego-network explorer across 1,533 nodes and 102 communities; surfaces betweenness centrality and contact-of-contact reach for any participant.</span>
+              </figcaption>
+            </figure>
+
+            <figure class="showcase__item">
+              <div class="showcase__img-wrap">
+                <img src="assets/images/dashboard_oltp.png"
+                  alt="Mini ERP Data Architecture — OLTP transactional schema across 9 tables and 4 dependency layers"
+                  loading="lazy" />
+              </div>
+              <figcaption>
+                <strong>Data Architecture — OLTP Schema</strong>
+                <span>Nine relational tables across four dependency layers; foreign-key relationships rendered as an interactive in-app reference diagram.</span>
+              </figcaption>
+            </figure>
+
+            <figure class="showcase__item">
+              <div class="showcase__img-wrap">
+                <img src="assets/images/dashboard_schema.png"
+                  alt="Star Schema ERD — fact_sales grain with dim_date, dim_customer, dim_product, and dim_warehouse"
+                  loading="lazy" />
+              </div>
+              <figcaption>
+                <strong>Star Schema — Analytics Layer (OLAP)</strong>
+                <span>Fact-sales grain at one row per order line, joined to four dimension tables — the analytics layer powering all Streamlit reporting views.</span>
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+
       </div>
     </section>
 
