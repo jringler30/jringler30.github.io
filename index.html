@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -751,6 +753,147 @@
 
       mobileTipQuery.addEventListener('change', () => {
         if (!mobileTipQuery.matches) closeAllTips();
+      });
+
+    })();
+  </script>
+
+  <!-- ============ CHAT WIDGET ============ -->
+  <div class="chat-widget" id="chatWidget">
+
+    <!-- Toggle button -->
+    <button class="chat-toggle" id="chatToggle" type="button" aria-label="Open contact form" aria-expanded="false">
+      <!-- Chat icon (shown when closed) -->
+      <svg class="chat-toggle__icon chat-toggle__icon--open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <!-- Close icon (shown when open) -->
+      <svg class="chat-toggle__icon chat-toggle__icon--close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Chat window -->
+    <div class="chat-window" id="chatWindow" aria-hidden="true" role="dialog" aria-label="Contact form">
+
+      <div class="chat-window__header">
+        <div>
+          <p class="chat-window__title">Send a message</p>
+          <p class="chat-window__sub">I'll reply to your email within 24&nbsp;hrs.</p>
+        </div>
+        <button class="chat-window__close" id="chatClose" type="button" aria-label="Close contact form">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="chat-window__body">
+
+        <!-- Form -->
+        <form class="chat-form" id="chatForm" novalidate>
+          <div class="chat-form__field">
+            <label for="chatName">Name</label>
+            <input type="text" id="chatName" name="from_name" placeholder="Your name" required autocomplete="name" />
+          </div>
+          <div class="chat-form__field">
+            <label for="chatEmail">Email</label>
+            <input type="email" id="chatEmail" name="reply_to" placeholder="you@example.com" required autocomplete="email" />
+          </div>
+          <div class="chat-form__field">
+            <label for="chatMsg">Message</label>
+            <textarea id="chatMsg" name="message" rows="4" placeholder="What's on your mind?" required></textarea>
+          </div>
+          <button class="chat-form__send" id="chatSend" type="submit" disabled>
+            Send <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+
+        <!-- Success state -->
+        <div class="chat-status chat-status--success" id="chatSuccess" hidden role="status" aria-live="polite">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="16 10 11 15 8 12"/></svg>
+          <p>Message sent!</p>
+          <span>I'll be in touch soon.</span>
+        </div>
+
+        <!-- Error state -->
+        <div class="chat-status chat-status--error" id="chatError" hidden role="alert" aria-live="assertive">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <p>Something went wrong.</p>
+          <span>Email me directly: <a href="mailto:jringler@utexas.edu">jringler@utexas.edu</a></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CHAT JS ============ -->
+  <script>
+    (() => {
+      // ─────────────────────────────────────────
+      // EMAILJS CREDENTIALS — paste yours here
+      // ─────────────────────────────────────────
+      const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // from EmailJS → Account → Public Key
+      const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // from EmailJS → Email Services
+      const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // from EmailJS → Email Templates
+      // ─────────────────────────────────────────
+
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+      const widget    = document.getElementById('chatWidget');
+      const toggle    = document.getElementById('chatToggle');
+      const window_   = document.getElementById('chatWindow');
+      const closeBtn  = document.getElementById('chatClose');
+      const form      = document.getElementById('chatForm');
+      const sendBtn   = document.getElementById('chatSend');
+      const success   = document.getElementById('chatSuccess');
+      const error     = document.getElementById('chatError');
+      const inputs    = form.querySelectorAll('input, textarea');
+
+      let isOpen = false;
+
+      /* --- Open / Close --- */
+      function openChat() {
+        isOpen = true;
+        widget.classList.add('is-open');
+        window_.setAttribute('aria-hidden', 'false');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.getElementById('chatName').focus();
+      }
+
+      function closeChat() {
+        isOpen = false;
+        widget.classList.remove('is-open');
+        window_.setAttribute('aria-hidden', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle.addEventListener('click', () => isOpen ? closeChat() : openChat());
+      closeBtn.addEventListener('click', closeChat);
+
+      // ESC key closes chat
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && isOpen) closeChat();
+      });
+
+      /* --- Enable send button only when all fields have input --- */
+      function validate() {
+        const allFilled = [...inputs].every(el => el.value.trim() !== '');
+        sendBtn.disabled = !allFilled;
+      }
+      inputs.forEach(el => el.addEventListener('input', validate));
+
+      /* --- Submit --- */
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        sendBtn.disabled = true;
+        sendBtn.textContent = 'Sending…';
+
+        emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+          .then(() => {
+            form.hidden = true;
+            success.hidden = false;
+            error.hidden = true;
+          })
+          .catch(() => {
+            sendBtn.disabled = false;
+            sendBtn.innerHTML = 'Send <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+            error.hidden = false;
+          });
       });
 
     })();
