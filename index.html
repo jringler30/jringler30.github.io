@@ -187,8 +187,25 @@
             data-img="assets/images/dashboard_main.png"
             data-link="https://github.com/jringler30/mini-erp-order-to-cash"
             tabindex="0" role="button" aria-label="View Mini ERP System details">
-            <div class="card__img">
-              <img src="assets/images/dashboard_main.png" alt="Mini ERP Executive Overview — KPI dashboard showing revenue, orders, and status breakdown" loading="lazy" />
+            <div class="card__img card__carousel">
+              <div class="carousel__track">
+                <img src="assets/images/dashboard_main.png"   alt="Mini ERP — Executive Overview KPI dashboard" loading="lazy" />
+                <img src="assets/images/dashboard_network.png" alt="Mini ERP — Jmail ego network explorer"      loading="lazy" />
+                <img src="assets/images/dashboard_oltp.png"   alt="Mini ERP — OLTP data architecture diagram"  loading="lazy" />
+                <img src="assets/images/dashboard_schema.png" alt="Mini ERP — Star schema analytics layer"     loading="lazy" />
+              </div>
+              <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Previous screenshot">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="carousel__btn carousel__btn--next" type="button" aria-label="Next screenshot">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="carousel__dots" aria-hidden="true">
+                <span class="carousel__dot active"></span>
+                <span class="carousel__dot"></span>
+                <span class="carousel__dot"></span>
+                <span class="carousel__dot"></span>
+              </div>
             </div>
             <div class="card__body">
               <h3 class="card__title">Mini ERP — Order-to-Cash System</h3>
@@ -201,64 +218,6 @@
           </article>
 
         </div>
-
-        <!-- ── Dashboard Showcase ── -->
-        <div class="showcase reveal">
-          <p class="label" style="margin-top:var(--sp-2xl)">Dashboard Showcase</p>
-          <p class="showcase__sub">Screenshots from the Mini ERP Order-to-Cash system — built end-to-end in Python, SQLite, and Streamlit.</p>
-          <div class="showcase__grid">
-
-            <figure class="showcase__item">
-              <div class="showcase__img-wrap">
-                <img src="assets/images/dashboard_main.png"
-                  alt="Mini ERP Executive Overview — KPI tiles for revenue, orders, and unpaid invoices with monthly trend chart"
-                  loading="lazy" />
-              </div>
-              <figcaption>
-                <strong>Executive Overview — KPI Dashboard</strong>
-                <span>High-level order-to-cash KPIs: revenue, order volume, unpaid invoices, and low-stock alerts with a monthly revenue trend and order-status breakdown.</span>
-              </figcaption>
-            </figure>
-
-            <figure class="showcase__item">
-              <div class="showcase__img-wrap">
-                <img src="assets/images/dashboard_network.png"
-                  alt="Jmail Email Network Intelligence — ego network explorer showing connections, betweenness, and community"
-                  loading="lazy" />
-              </div>
-              <figcaption>
-                <strong>Email Network Intelligence — Ego Explorer</strong>
-                <span>Interactive ego-network explorer across 1,533 nodes and 102 communities; surfaces betweenness centrality and contact-of-contact reach for any participant.</span>
-              </figcaption>
-            </figure>
-
-            <figure class="showcase__item">
-              <div class="showcase__img-wrap">
-                <img src="assets/images/dashboard_oltp.png"
-                  alt="Mini ERP Data Architecture — OLTP transactional schema across 9 tables and 4 dependency layers"
-                  loading="lazy" />
-              </div>
-              <figcaption>
-                <strong>Data Architecture — OLTP Schema</strong>
-                <span>Nine relational tables across four dependency layers; foreign-key relationships rendered as an interactive in-app reference diagram.</span>
-              </figcaption>
-            </figure>
-
-            <figure class="showcase__item">
-              <div class="showcase__img-wrap">
-                <img src="assets/images/dashboard_schema.png"
-                  alt="Star Schema ERD — fact_sales grain with dim_date, dim_customer, dim_product, and dim_warehouse"
-                  loading="lazy" />
-              </div>
-              <figcaption>
-                <strong>Star Schema — Analytics Layer (OLAP)</strong>
-                <span>Fact-sales grain at one row per order line, joined to four dimension tables — the analytics layer powering all Streamlit reporting views.</span>
-              </figcaption>
-            </figure>
-
-          </div>
-        </div>
-
       </div>
     </section>
 
@@ -596,6 +555,31 @@
         document.body.style.overflow = '';
         if (lastFocused) lastFocused.focus();
       }
+
+      /* --- Card Carousel --- */
+      document.querySelectorAll('.card__carousel').forEach(carousel => {
+        const track = carousel.querySelector('.carousel__track');
+        const imgs  = track.querySelectorAll('img');
+        const dots  = carousel.querySelectorAll('.carousel__dot');
+        const card  = carousel.closest('.card');
+        let idx = 0;
+
+        function goTo(n) {
+          idx = (n + imgs.length) % imgs.length;
+          track.style.transform = `translateX(-${idx * 100}%)`;
+          dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+          card.dataset.img = imgs[idx].src;
+        }
+
+        goTo(0);
+
+        carousel.querySelector('.carousel__btn--prev').addEventListener('click', e => {
+          e.stopPropagation(); goTo(idx - 1);
+        });
+        carousel.querySelector('.carousel__btn--next').addEventListener('click', e => {
+          e.stopPropagation(); goTo(idx + 1);
+        });
+      });
 
       cards.forEach(card => {
         card.addEventListener('click', () => openModal(card));
