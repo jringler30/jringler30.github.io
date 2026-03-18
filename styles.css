@@ -954,9 +954,9 @@ button { font-family: inherit; cursor: pointer; }
 
 /* Dark mode: frosted-glass pill for contrast on transparent logos */
 [data-theme="dark"] .school-logo {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.40);
+  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(4px);
 }
 
