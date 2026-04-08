@@ -66,8 +66,14 @@
       <div class="container">
         <header class="section__head">
           <span class="label">Selected Work</span>
-          <h2>Systems I've built.</h2>
+          <h2>Most recent repositories.</h2>
+          <p class="section__sub">Pulled live from GitHub so your newest work always appears first.</p>
         </header>
+
+        <div class="repo-feed" id="repoFeed" aria-live="polite">
+          <p class="repo-feed__status" id="repoStatus">Loading latest repositories from GitHub…</p>
+          <div class="repo-feed__grid" id="repoGrid"></div>
+        </div>
 
         <!-- Filter chips -->
         <div class="filters" role="group" aria-label="Filter projects">
@@ -81,7 +87,7 @@
         <!-- Project grid -->
         <div class="projects" id="projectGrid">
 
-          <article class="card" data-tags="optimization"
+          <article class="card" data-tags="optimization" data-date="2026-03"
             data-title="Portfolio TLH Optimizer"
             data-desc="Optimization engine that models tax-loss harvesting strategies across user-defined portfolios. Features scenario analysis, constraint handling, and interactive KPI reporting — deployed as a production Streamlit application for the Vise capstone. Enables retail investors to systematically identify and execute TLH opportunities across diversified holdings."
             data-stack="Python, Streamlit, Pandas, Optimization"
@@ -102,7 +108,7 @@
             </div>
           </article>
 
-          <article class="card" data-tags="dashboard"
+          <article class="card" data-tags="dashboard" data-date="2025-12"
             data-title="Financial Analytics Toolkit"
             data-desc="End-to-end pipeline for portfolio return calculations, factor decomposition, and interactive performance visualization. Built first in Jupyter as a research tool, then refactored and shipped as a Streamlit web application for broader team use. Supports WRDS data ingestion and automated reporting workflows."
             data-stack="Python, Streamlit, NumPy, Plotly"
@@ -122,7 +128,7 @@
             </div>
           </article>
 
-          <article class="card" data-tags="ml-nlp"
+          <article class="card" data-tags="ml-nlp" data-date="2024-12"
             data-title="ML &amp; NLP Research"
             data-desc="Applied machine learning projects spanning classification, clustering, and deep learning — including NLP sentiment analysis on earnings call transcripts to predict short-term stock returns. Covers logistic regression, PCA, Gaussian Mixture Models, neural networks, and forward-looking statement detection with strong correlation results."
             data-stack="scikit-learn, PyTorch, NLP, Pandas"
@@ -142,7 +148,7 @@
             </div>
           </article>
 
-          <article class="card" data-tags="network"
+          <article class="card" data-tags="network" data-date="2024-09"
             data-title="Email Network Scraper"
             data-desc="Selenium-based web scraper that extracts communication metadata from email archives, then applies community detection algorithms on bipartite graphs to reveal hidden organizational structure and communication patterns. Designed for large-scale network analysis research."
             data-stack="Selenium, NetworkX, Python, Graph Theory"
@@ -162,7 +168,7 @@
             </div>
           </article>
 
-          <article class="card" data-tags="ml-nlp"
+          <article class="card" data-tags="ml-nlp" data-date="2025-05"
             data-title="Connect 4 AI — CNN &amp; Transformer"
             data-desc="Deep learning agents trained via self-play and MCTS rollouts to master Connect 4. Implements CNN and Transformer architectures for board evaluation with a policy and rules filter for legal moves. Features an Anvil web app for human-vs-AI play, deployed on AWS Lightsail via Docker for real-time inference."
             data-stack="Python, PyTorch, CNN, Transformers, AWS, Anvil, Docker"
@@ -183,7 +189,7 @@
             </div>
           </article>
 
-          <article class="card" data-tags="dashboard"
+          <article class="card" data-tags="dashboard" data-date="2026-02"
             data-title="Mini ERP — Order-to-Cash System"
             data-desc="Full-stack ERP built from scratch in Python, SQLite, and Streamlit. Includes an OLTP transactional layer (9 tables, 4 dependency layers), a star-schema analytics layer (OLAP), and five reporting modules: Executive Overview KPIs, Sales Analytics, Order Operations, Inventory Monitoring, and an interactive Data Architecture reference. Also includes a Jmail email network intelligence module with ego-network exploration across 1,533 nodes and 102 communities."
             data-stack="Python, SQLite, Streamlit, Plotly, NetworkX"
@@ -533,9 +539,85 @@
       }, { threshold: 0.01, rootMargin: '0px 0px 0px 0px' });
       document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 
+      /* --- Live GitHub repos --- */
+      const repoStatus = document.getElementById('repoStatus');
+      const repoGrid = document.getElementById('repoGrid');
+
+      const formatRepoDate = iso => {
+        const d = new Date(iso);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      };
+
+      const renderRepoCard = repo => {
+        const article = document.createElement('article');
+        article.className = 'repo-card';
+
+        const head = document.createElement('div');
+        head.className = 'repo-card__head';
+
+        const h3 = document.createElement('h3');
+        const link = document.createElement('a');
+        link.href = repo.html_url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = repo.name;
+        h3.appendChild(link);
+
+        const updated = document.createElement('span');
+        updated.textContent = `Updated ${formatRepoDate(repo.updated_at)}`;
+        head.append(h3, updated);
+
+        const desc = document.createElement('p');
+        desc.className = 'repo-card__desc';
+        desc.textContent = repo.description || 'No description provided.';
+
+        const meta = document.createElement('ul');
+        meta.className = 'repo-card__meta';
+        [repo.language || 'N/A', `★ ${repo.stargazers_count}`, `Forks ${repo.forks_count}`].forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          meta.appendChild(li);
+        });
+
+        const topics = document.createElement('ul');
+        topics.className = 'repo-card__topics';
+        const topicList = (repo.topics || []).slice(0, 3);
+        (topicList.length ? topicList : ['repository']).forEach(topic => {
+          const li = document.createElement('li');
+          li.textContent = topic;
+          topics.appendChild(li);
+        });
+
+        article.append(head, desc, meta, topics);
+
+        return article;
+      };
+
+      fetch('https://api.github.com/users/jringler30/repos?sort=updated&direction=desc&per_page=6&type=owner')
+        .then(res => {
+          if (!res.ok) throw new Error('GitHub API request failed');
+          return res.json();
+        })
+        .then(repos => {
+          repoGrid.innerHTML = '';
+          repos
+            .filter(repo => !repo.fork)
+            .slice(0, 6)
+            .forEach(repo => repoGrid.appendChild(renderRepoCard(repo)));
+          repoStatus.textContent = 'Latest repositories (sorted by last update):';
+        })
+        .catch(() => {
+          repoStatus.textContent = 'Unable to load GitHub repositories right now. Please try again later.';
+        });
+
       /* --- Filter chips --- */
       const chips = document.querySelectorAll('.chip[data-filter]');
-      const cards = document.querySelectorAll('.card[data-tags]');
+      const projectGrid = document.getElementById('projectGrid');
+      const cards = [...document.querySelectorAll('.card[data-tags]')];
+
+      cards
+        .sort((a, b) => (b.dataset.date || '').localeCompare(a.dataset.date || ''))
+        .forEach(card => projectGrid.appendChild(card));
 
       chips.forEach(chip => {
         chip.addEventListener('click', () => {
