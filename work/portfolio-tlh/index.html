@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A UT Austin MSBA capstone that compares tax-aware rebalancing strategies across historical market scenarios.">
+  <meta name="theme-color" content="#10120e">
+  <title>Portfolio TLH Optimizer | Josh Ringler</title>
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/terminal.js" defer></script>
+</head>
+<body class="case-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="wordmark" href="/" aria-label="Josh Ringler home"><span class="monogram" aria-hidden="true">&gt;_</span><span>Ringler<span class="os">.OS</span></span></a>
+      <nav aria-label="Main navigation">
+        <a href="/#work">Work</a>
+        <a href="/#about">About</a>
+        <a class="nav-contact" href="/#contact">Contact</a>
+        <button type="button" class="motion-switch" data-motion-switch title="Toggle motion effects" aria-label="Motion effects" aria-pressed="false" hidden><span class="motion-led" aria-hidden="true"></span><span>Motion</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" class="case-panel shell">
+    <div class="case-bar"><span>RINGLER.OS / PROJECT</span><a href="/#work">← Return to console</a></div>
+    <header class="case-hero">
+      <p class="section-label">Quantitative finance · UT Austin capstone</p>
+      <h1>Portfolio TLH Optimizer</h1>
+      <p class="case-intro">A historical simulator for testing how tax-loss harvesting and rebalancing rules change portfolio performance.</p>
+      <div class="case-actions">
+        <a class="button button-primary" href="https://github.com/jringler30/portfolio-tlh-optimizer">View repository <span class="external-icon" aria-hidden="true"></span></a>
+        <a class="text-link" href="#approach">How it works <span aria-hidden="true">↓</span></a>
+      </div>
+    </header>
+
+    <figure class="case-figure">
+      <div class="screenshot-frame">
+        <img src="/assets/images/portfolio.webp" alt="Portfolio simulation dashboard showing strategy controls, performance metrics, and comparison charts" width="1600" height="861" decoding="async">
+      </div>
+      <figcaption>Streamlit dashboard from the portfolio optimizer repository.</figcaption>
+    </figure>
+
+    <section id="approach" class="case-section" aria-labelledby="approach-title">
+      <h2 id="approach-title">How the simulator works</h2>
+      <p>For the Vise capstone, we built a simulator that applies different rebalancing rules to the same historical price data. It compares scheduled rebalancing with a drift-band approach, which rebalances when holdings move beyond a threshold from their target allocation.</p>
+      <p>A separate engine tracks tax lots, distinguishes short- and long-term gains, and models wash-sale rules. Streamlit brings the calculations together so a user can review return, drawdown, and risk-adjusted performance side by side.</p>
+    </section>
+
+    <section class="case-section" aria-labelledby="backtest-title">
+      <h2 id="backtest-title">Inside the backtest</h2>
+      <p>The comparative analysis covered 96 runs. Testing multiple market conditions and allocations makes it easier to see which conclusions depend on the inputs.</p>
+      <ul class="case-facts">
+        <li><button type="button" data-tooltip="regimes" aria-describedby="regimes"><span class="fact-value">3</span><span>Market regimes</span></button><span class="sr-only" id="regimes">The study repeated the strategy comparisons across three historical market conditions.</span></li>
+        <li><button type="button" data-tooltip="portfolios" aria-describedby="portfolios"><span class="fact-value">2</span><span>Portfolios</span></button><span class="sr-only" id="portfolios">Two portfolios let the team compare how allocation changes the results.</span></li>
+        <li><button type="button" data-tooltip="strategies" aria-describedby="strategies"><span class="fact-value">8</span><span>Strategies</span></button><span class="sr-only" id="strategies">Each portfolio and market combination was evaluated against eight strategy setups.</span></li>
+      </ul>
+    </section>
+
+    <nav class="case-pagination" aria-label="Explore other work">
+      <a class="text-link" href="/#work"><span aria-hidden="true">←</span> All work</a>
+      <a class="text-link" href="/work/order-to-cash/">Order-to-Cash Platform <span aria-hidden="true">→</span></a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-content">
+      <a class="wordmark" href="/"><span class="monogram" aria-hidden="true">&gt;_</span><span>Ringler<span class="os">.OS</span></span></a>
+      <div class="footer-links">
+        <a class="text-link" href="https://www.linkedin.com/in/joshuaringler/">LinkedIn <span class="external-icon" aria-hidden="true"></span></a>
+        <a class="text-link" href="https://github.com/jringler30">GitHub <span class="external-icon" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </footer>
+  <div id="floating-tooltip" class="floating-tooltip" aria-hidden="true" hidden></div>
+</body>
+</html>
