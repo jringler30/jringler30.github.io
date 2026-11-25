@@ -60,3 +60,5 @@ footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-s
  .shell{width:calc(100% - 34px)}.hero-grid,.projects{grid-template-columns:1fr}.hero-grid{gap:24px}.hero-aside{max-width:none}.timeline{grid-auto-flow:row;grid-template-columns:1fr;overflow:visible;gap:12px;border-left:2px solid #a7c7c0;padding-left:12px}.time{padding:4px 0;border:0;margin-bottom:3px}.timeline-nav{display:none}.event{min-height:auto}
 }
 @media(max-width:410px){nav{gap:9px}nav a,.brand{font-size:.76rem}.top{gap:7px}.brand{gap:5px}}
+
+.game-preview{aspect-ratio:1.95;background:#d9ece7;display:grid;place-content:center;justify-items:center;gap:6px;color:#17423e;font-size:.72rem;font-weight:700;letter-spacing:.06em}.game-board{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;background:#174d49;border-radius:7px;padding:8px}.game-board i{width:clamp(10px,1.45vw,19px);aspect-ratio:1;border-radius:50%;background:#e1f0ec}.game-board .light{background:#e8b959}.game-board .dark{background:#76bdb1}.case .game-preview{max-height:315px}
