@@ -97,3 +97,33 @@ footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-s
   .top { flex-wrap: wrap; justify-content: flex-start; column-gap: 15px; padding-block: 10px; }
   nav { gap: 12px; }
 }
+
+.case p + p { margin-top: 12px; }
+.case figcaption { margin-top: 9px; color: var(--muted); font-size: .93rem; }
+.case table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; table-layout: fixed; }
+.case caption { padding-bottom: 9px; text-align: left; font-weight: 650; color: var(--muted); }
+.case th, .case td { text-align: left; border-bottom: 1px solid #cdd8cd; padding: 10px 8px; overflow-wrap: anywhere; }
+.case td { font-variant-numeric: tabular-nums; }
+.case thead th { background: #eef2e9; }
+.gameplay { object-position: center; }
+.case .gameplay { width: min(100%, 480px); height: auto; aspect-ratio: auto; }
+.measure-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 12px; }
+.measure-controls button {
+  font: inherit;
+  min-height: 44px;
+  cursor: pointer;
+  border: 1px solid #bdcdbf;
+  color: var(--ink);
+  background: #fff;
+  border-radius: 5px;
+  padding: 6px 11px;
+}
+.measure-controls button[aria-pressed=true] { background: var(--teal); border-color: var(--teal); color: #fff; }
+@media (max-width: 410px) {
+  .case table { font-size: .82rem; }
+  .case th, .case td { padding-inline: 5px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .measure:not([hidden]) { animation: measure-change 170ms ease-out; }
+  @keyframes measure-change { from { opacity: .65; } to { opacity: 1; } }
+}

@@ -2,5 +2,23 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mini ERP Order-to-Cash System | Joshua Ringler</title><meta name="description" content="A Python and SQL pipeline that reconciled 3,011 rows and $691K in synthetic transactions."><link rel="stylesheet" href="/assets/consulting.css"><script src="/assets/timeline.js" defer></script></head>
 <body><a class="skip" href="#main">Skip to content</a>
-<header class="site-header"><div class="shell top"><a class="brand" href="/"><span aria-hidden="true">JR</span> Joshua Ringler</a><nav aria-label="Main navigation"><a href="/#work">Work</a><a href="/#about">About</a><a href="/#contact">Contact</a></nav></div></header>
-<main id="main"><article class="shell case section"><a class="arrow" href="/#work">← Selected work</a><p class="label">Personal project · 2026</p><h1>Mini ERP Order-to-Cash System</h1><p class="lead">A Python and SQL pipeline that reconciled 3,011 rows and $691K in synthetic transactions.</p><a class="primary" href="https://github.com/jringler30/mini-erp-order-to-cash">View repository ↗</a><figure><img src="/assets/images/order-to-cash.webp" alt="Mini ERP Order-to-Cash System project screenshot"></figure><h2>What we built</h2><p>I built a relational database around orders, shipments, invoices, and payments, then used Python and SQL to transform the data into a reporting model.</p><h2>What the project shows</h2><p>I reconciled 3,011 rows and $691K exactly against the synthetic source data.</p></article></main><footer><div class="shell">Joshua Ringler <a href="https://github.com/jringler30">GitHub ↗</a></div></footer></body></html>
+<header class="site-header"><div class="shell top"><a class="brand" href="/"><span aria-hidden="true">JR</span> Joshua Ringler</a><nav aria-label="Main navigation"><a href="/#work">Work</a><a href="/#about">About</a><a href="/#contact">Contact</a><a class="nav-resume" href="/assets/joshua-ringler-resume.pdf">Résumé</a></nav></div></header>
+<main id="main"><article class="shell case section"><a class="arrow" href="/#work">← Selected work</a><p class="label">Personal project · 2026</p><h1>Mini ERP Order-to-Cash System</h1><p class="lead">A Python and SQL pipeline that reconciled 3,011 rows and $691K in synthetic transactions.</p><a class="primary" href="https://github.com/jringler30/mini-erp-order-to-cash">View repository ↗</a>
+
+<h2 id="validation">Did the totals match the source?</h2>
+<p>I checked the reporting model against the synthetic source tables after loading them. The revenue total and sales-line count both matched exactly.</p>
+<div class="measure-controls" role="group" aria-label="Choose a reconciliation measure" hidden>
+  <button type="button" aria-controls="paid-revenue" aria-pressed="true">Paid revenue</button>
+  <button type="button" aria-controls="sales-lines" aria-pressed="false">Sales-line count</button>
+</div>
+<div id="paid-revenue" class="measure">
+  <table><caption>Paid revenue · Synthetic data</caption><thead><tr><th scope="col">Source orders</th><th scope="col">Reporting model</th><th scope="col">Difference</th></tr></thead><tbody><tr><td>$691,024.17</td><td>$691,024.17</td><td>$0.00</td></tr></tbody></table>
+</div>
+<div id="sales-lines" class="measure">
+  <table><caption>Sales-line count · Synthetic data</caption><thead><tr><th scope="col">Source sales lines</th><th scope="col">Reporting model</th><th scope="col">Difference</th></tr></thead><tbody><tr><td>3,011</td><td>3,011</td><td>0</td></tr></tbody></table>
+</div>
+<h2>Where a reporting error could creep in</h2>
+<p>I built the relational schema for orders, shipments, invoices, and payments, then transformed it into a star schema for reporting. A join that repeats a sales line can inflate revenue. The validation checks compare row counts and revenue totals against the source, then compare each reporting line amount with the corresponding source line. The exact matches apply to this generated dataset.</p>
+<p><a class="arrow" href="https://github.com/jringler30/mini-erp-order-to-cash#validation">Review the repository and validation results <span aria-hidden="true">↗</span></a></p>
+<figure><img src="/assets/images/order-to-cash.webp" alt="Order-to-cash dashboard summarizing paid revenue and fulfillment activity"><figcaption>The Streamlit dashboard reads from the reporting model. The tables above show how its paid revenue and sales-line count were reconciled.</figcaption></figure>
+</article></main><footer><div class="shell">Joshua Ringler <a href="https://github.com/jringler30">GitHub ↗</a></div></footer></body></html>

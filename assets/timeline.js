@@ -53,3 +53,21 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
     reveal.observe(element);
   }
 }
+
+const measureControls = document.querySelector('.measure-controls');
+
+if (measureControls) {
+  const measureButtons = [...measureControls.querySelectorAll('button')];
+  const measures = measureButtons.map(button => document.getElementById(button.getAttribute('aria-controls')));
+
+  function selectMeasure(index) {
+    measureButtons.forEach((button, position) => {
+      button.setAttribute('aria-pressed', String(position === index));
+      measures[position].hidden = position !== index;
+    });
+  }
+
+  selectMeasure(0);
+  measureControls.hidden = false;
+  measureButtons.forEach((button, index) => button.addEventListener('click', () => selectMeasure(index)));
+}
