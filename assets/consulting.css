@@ -60,34 +60,6 @@ footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-s
 
 
 
-.project-spotlight {
-  min-width: 0;
-  padding: clamp(18px, 3vw, 34px);
-  border: 1px solid #cdd8cd;
-  border-radius: 12px;
-  background: #fff;
-}
-.project-spotlight h2 { font-size: clamp(1.5rem, 3vw, 2.3rem); margin: 8px 0 16px; }
-.pipeline {
-  list-style: none;
-  margin: 0 0 14px 5px;
-  padding: 0 0 0 15px;
-  border-left: 1px solid #9eb6a8;
-}
-.pipeline li { position: relative; padding-bottom: 13px; }
-.pipeline li:last-child { padding-bottom: 2px; }
-.pipeline li::before {
-  content: "";
-  position: absolute;
-  top: .56em;
-  left: -19px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--teal);
-}
-.pipeline strong, .pipeline span { display: block; }
-.pipeline span { color: var(--muted); font-size: .87rem; }
 .featured {
   grid-column: 1 / -1;
   display: grid;
@@ -144,3 +116,71 @@ footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-s
   .timeline-head { min-height: 44px; }
 }
 .case img { width: auto; height: auto; object-fit: contain; }
+
+/* Homepage palette and project preview */
+.portfolio-home { background: #f8f8f0; }
+.portfolio-home .site-header { background: #f8f8f0; }
+.portfolio-home .brand span { background: #152d26; color: #e0fc92; border-radius: 50%; }
+.portfolio-home .nav-resume { border: 1px solid #bdccb9; border-radius: 99px; padding: 6px 12px; }
+.portfolio-home .hero {
+  --hero-ink: #f6f8e9;
+  --hero-accent: #e0fc92;
+  color: var(--hero-ink);
+  background-color: #10251f;
+  background-image:
+    radial-gradient(ellipse at 88% 22%, #3b664d 0, transparent 49%),
+    radial-gradient(circle, #adc0a626 1px, transparent 1.1px);
+  background-size: auto, 28px 28px;
+  padding-block: clamp(40px, 7vw, 96px);
+}
+.portfolio-home .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 5vw, 75px); }
+.hero-intro .label { color: #c5dbbd; }
+.hero-intro h1 { font-size: clamp(3.3rem, 8.1vw, 7.25rem); line-height: .88; letter-spacing: -.075em; margin-block: 20px 22px; }
+.hero-intro h1 span { color: var(--hero-accent); display: block; }
+.hero-intro .lead { color: #d1e0d2; max-width: 34ch; }
+.hero-intro .primary { background: var(--hero-accent); border-color: var(--hero-accent); color: #14241c; }
+.hero-intro .primary:hover { background: #f0ffbb; }
+.hero-intro .secondary { color: var(--hero-ink); background: transparent; border-color: #829c8c; }
+.hero-intro .secondary:hover { background: #304b3c; }
+.hero :focus-visible { outline-color: var(--hero-accent); }
+.showcase { min-width: 0; border: 1px solid #526d5d; border-radius: 18px; padding: clamp(12px, 1.8vw, 22px); background: #142d25; box-shadow: 0 20px 48px #081c16a0; }
+.showcase-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.showcase-head h2 { margin: 0; font-size: 1rem; letter-spacing: 0; }
+.showcase-controls { display: flex; flex-wrap: wrap; gap: 5px; }
+.showcase-controls button { min-height: 44px; background: transparent; color: var(--hero-ink); font: inherit; font-size: .79rem; font-weight: 650; border: 1px solid #577563; border-radius: 99px; padding: 4px 10px; cursor: pointer; }
+.showcase-controls button:hover { background: #355644; }
+.showcase-controls button[aria-pressed=true] { background: var(--hero-accent); color: #14241c; border-color: var(--hero-accent); }
+.showcase-image { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; aspect-ratio: 1.95; overflow: hidden; padding: clamp(9px, 2vw, 23px); border-radius: 10px; background: linear-gradient(130deg, #bce2c3, #537e68); }
+.showcase-image img { display: block; width: 100%; height: 100%; min-height: 0; min-width: 0; object-fit: cover; object-position: top; border-radius: 6px; box-shadow: 0 9px 20px #0a211a66; }
+.showcase-image--portfolio-tlh { background: linear-gradient(130deg, #bad8ec, #617c9d); }
+.showcase-image--connect-4-ai { background: linear-gradient(130deg, #e3d8fc, #8e83b2); }
+.showcase-image--connect-4-ai img { width: auto; max-width: 100%; object-fit: contain; object-position: center; }
+.showcase-copy { padding: 16px 2px 2px; }
+.showcase-copy .label { color: #aacfaf; }
+.showcase-copy h3 { margin: 6px 0; font-size: clamp(1.23rem, 2.4vw, 1.85rem); }
+.showcase-copy a { text-decoration: none; }
+.showcase-copy a:hover { text-decoration: underline; text-underline-offset: .18em; }
+.showcase-copy h3 span { color: var(--hero-accent); font-size: .8em; }
+.showcase-copy > p:last-child { color: #d1e0d2; font-size: .94rem; }
+.portfolio-home #work h2 { font-size: clamp(2.55rem, 5.6vw, 5rem); }
+.portfolio-home .project { border-radius: 16px; border-top: 4px solid var(--project-accent); }
+.project--erp { --project-accent: #53846d; background: #eef5e9; }
+.project--finance { --project-accent: #6582a5; }
+.project--ml { --project-accent: #8474a9; }
+.portfolio-home .project--ml .project-image { object-fit: contain; background: #e9e1f4; padding: 12px; }
+.portfolio-home .about { background: #eaf0e6; }
+.portfolio-home .contact { border-radius: 16px; padding: clamp(23px, 4vw, 52px); margin-block: clamp(30px, 5vw, 65px); background: #142d25; color: #f6f8e9; }
+.portfolio-home .contact p { color: #d1e0d2; }
+.portfolio-home .contact .primary { background: #e0fc92; color: #14241c; border-color: #e0fc92; }
+.portfolio-home .contact .primary:hover { background: #f0ffbb; }
+.portfolio-home .contact :focus-visible { outline-color: #e0fc92; }
+@media (max-width: 760px) {
+  .portfolio-home .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-intro h1 { font-size: clamp(3.3rem, 12vw, 6.15rem); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .showcase-panel:not([hidden]) { animation: showcase-appear 220ms ease-out; }
+  .portfolio-home .project { transition: box-shadow 180ms ease, transform 180ms ease; }
+  .portfolio-home .project:hover, .portfolio-home .project:focus-within { box-shadow: 0 10px 25px #132b2019; transform: translateY(-3px); }
+  @keyframes showcase-appear { from { opacity: .65; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+}

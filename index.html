@@ -1,36 +1,67 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Joshua Ringler | Business Analytics Consultant</title><meta name="description" content="Oracle Fusion HCM consulting, data engineering, and financial analytics projects."><link rel="stylesheet" href="/assets/consulting.css"><script src="/assets/timeline.js" defer></script></head>
-<body><a class="skip" href="#main">Skip to content</a>
+<title>Joshua Ringler | Business Analytics Consultant</title><meta name="description" content="Oracle Fusion HCM consulting, data engineering, and financial analytics projects."><link rel="stylesheet" href="/assets/consulting.css"><script src="/assets/timeline.js" defer></script><script src="/assets/showcase.js" defer></script></head>
+<body class="portfolio-home"><a class="skip" href="#main">Skip to content</a>
 <header class="site-header"><div class="shell top"><a class="brand" href="/"><span aria-hidden="true">JR</span> Joshua Ringler</a><nav aria-label="Main navigation"><a href="/#work">Work</a><a href="/#about">About</a><a href="/#contact">Contact</a><a class="nav-resume" href="/assets/joshua-ringler-resume.pdf">Résumé</a></nav></div></header>
 <main id="main">
 <section class="hero">
   <div class="shell hero-grid">
     <div class="hero-intro">
       <p class="label">Business analytics consultant · Austin, TX</p>
-      <h1>Joshua Ringler</h1>
+      <h1>Joshua <span>Ringler</span></h1>
       <p class="lead">I work on Oracle Fusion HCM Compensation at Alithya and build data tools for finance and operations.</p>
       <div class="actions">
         <a class="primary" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
         <a class="secondary" href="/assets/joshua-ringler-resume.pdf">View résumé <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-    <aside class="project-spotlight" aria-labelledby="spotlight-title">
-      <p class="label">Featured project · Mini ERP</p>
-      <h2 id="spotlight-title">From orders to reporting</h2>
-      <ol class="pipeline">
-        <li><strong>Model the order lifecycle</strong><span>Orders, shipments, invoices, and payments</span></li>
-        <li><strong>Build the reporting layer</strong><span>Python and SQL ETL into a star schema</span></li>
-        <li><strong>Make operations visible</strong><span>Revenue and fulfillment dashboards in Streamlit</span></li>
-      </ol>
-      <a class="arrow" href="/work/order-to-cash/">Read the ERP case study <span aria-hidden="true">→</span></a>
+    <aside class="showcase" aria-labelledby="showcase-title">
+      <div class="showcase-head">
+        <h2 id="showcase-title">Project preview</h2>
+        <div class="showcase-controls" role="group" aria-label="Choose a project to preview" hidden>
+          <button type="button" aria-controls="preview-order-to-cash" aria-pressed="true">Mini ERP</button>
+          <button type="button" aria-controls="preview-portfolio-tlh" aria-pressed="false">Tax strategy</button>
+          <button type="button" aria-controls="preview-connect-4-ai" aria-pressed="false">Connect 4</button>
+        </div>
+      </div>
+      <p class="sr" role="status" data-showcase-status></p>
+      <div id="preview-order-to-cash" class="showcase-panel">
+        <div class="showcase-image showcase-image--order-to-cash">
+          <img src="/assets/images/order-to-cash.webp" alt="Order-to-cash dashboard showing revenue and fulfillment metrics" width="1467" height="1100" fetchpriority="high">
+        </div>
+        <div class="showcase-copy">
+          <p class="label">Data engineering</p>
+          <h3><a href="/work/order-to-cash/">From orders to reporting <span aria-hidden="true">↗</span></a></h3>
+          <p>Turn orders, shipments, invoices, and payments into a reporting model and dashboard.</p>
+        </div>
+      </div>
+      <div id="preview-portfolio-tlh" class="showcase-panel" hidden>
+        <div class="showcase-image showcase-image--portfolio-tlh">
+          <img src="/assets/images/portfolio.webp" alt="Portfolio simulator with strategy controls and return metrics" width="1600" height="861" loading="lazy">
+        </div>
+        <div class="showcase-copy">
+          <p class="label">Quantitative finance</p>
+          <h3><a href="/work/portfolio-tlh/">Test tax-aware rebalancing <span aria-hidden="true">↗</span></a></h3>
+          <p>Compare rebalancing rules and tax-loss harvesting using historical prices.</p>
+        </div>
+      </div>
+      <div id="preview-connect-4-ai" class="showcase-panel" hidden>
+        <div class="showcase-image showcase-image--connect-4-ai">
+          <img src="/assets/images/connect-4-gameplay.webp" alt="Connect 4 game board with red and yellow pieces" width="400" height="283" loading="lazy">
+        </div>
+        <div class="showcase-copy">
+          <p class="label">Applied machine learning</p>
+          <h3><a href="/work/connect-4-ai/">Play against a model <span aria-hidden="true">↗</span></a></h3>
+          <p>Our team built a game where players choose a CNN or Transformer opponent.</p>
+        </div>
+      </div>
     </aside>
   </div>
 </section>
 <section class="shell section" id="work">
   <h2>Selected work</h2>
   <div class="projects">
-    <article class="project featured">
+    <article class="project featured project--erp">
       <div class="project-content">
         <p class="label">Data engineering · Personal project</p>
         <h3><a href="/work/order-to-cash/">Mini ERP Order-to-Cash</a></h3>
@@ -39,7 +70,7 @@
       </div>
       <img class="project-image" src="/assets/images/order-to-cash.webp" alt="Order-to-cash reporting dashboard" loading="lazy" width="1467" height="1100">
     </article>
-    <article class="project">
+    <article class="project project--finance">
       <img class="project-image" src="/assets/images/portfolio.webp" alt="Portfolio simulator with rebalancing inputs and return metrics" loading="lazy" width="1600" height="861">
       <div class="project-content">
         <p class="label">Finance · Vise capstone</p>
@@ -48,7 +79,7 @@
         <a class="arrow" href="https://github.com/jringler30/portfolio-tlh-optimizer">Optimizer source code <span aria-hidden="true">↗</span></a>
       </div>
     </article>
-    <article class="project">
+    <article class="project project--ml">
       <img class="project-image gameplay" src="/assets/images/connect-4-gameplay.webp" alt="Connect 4 gameplay with red and yellow pieces on the board" width="400" height="283" loading="lazy">
       <div class="project-content">
         <p class="label">Machine learning · Team course project</p>
