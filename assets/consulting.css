@@ -18,7 +18,7 @@ p{margin:0}
 .brand{gap:10px}
 .brand span{background:var(--teal);color:white;border-radius:5px;padding:7px;font-size:.75rem}
 nav a{font-size:.87rem}nav a:hover,.arrow:hover{color:var(--teal)}
-.hero{background:#f4f5ed;border-bottom:1px solid var(--line);padding:clamp(49px,8vw,110px) 0}
+.hero{background:#f4f5ed;border-bottom:1px solid var(--line);padding:clamp(44px,7vw,90px) 0}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:5vw;align-items:center}
 .label{font-size:.73rem;text-transform:uppercase;letter-spacing:.105em;color:var(--teal);font-weight:750}
 h1{font-size:clamp(2.7rem,7vw,6rem);letter-spacing:-.065em;margin:12px 0 14px}
@@ -31,12 +31,11 @@ h1 span{color:var(--teal)}
 .secondary{color:var(--teal);background:white}
 .section{padding-block:clamp(40px,6vw,73px)}
 h2{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.045em;margin:6px 0 22px}
-.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
-.project{border:1px solid var(--line);border-radius:9px;overflow:hidden;display:flex;flex-direction:column}
-.project-image{background:#e5eeec;display:block}
-.project-image img{width:100%;aspect-ratio:1.95;object-fit:cover;object-position:top;display:block}
-.project-content{padding:18px;display:flex;flex:1;flex-direction:column;gap:9px}
-.project h3{font-size:1.28rem}.project h3 a{text-decoration:none}
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.project{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden;display:flex;flex-direction:column}
+.project-image{display:block;width:100%;height:auto;aspect-ratio:2.12;object-fit:cover;object-position:top;background:#e5eeec}
+.project-content{padding:clamp(19px,3vw,34px);display:flex;flex:1;flex-direction:column;gap:9px}
+.project h3{font-size:clamp(1.34rem,2.4vw,2rem)}.project h3 a{text-decoration:none}
 .arrow{font-size:.88rem;color:var(--teal);font-weight:700;text-decoration:none}
 .project .arrow{margin-top:auto;padding-top:6px}
 .about{background:#f5f5ee;border-block:1px solid var(--line)}
@@ -61,45 +60,40 @@ footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-s
 
 .game-preview{aspect-ratio:1.95;background:#d9ece7;display:grid;place-content:center;justify-items:center;gap:6px;color:#17423e;font-size:.72rem;font-weight:700;letter-spacing:.06em}.game-board{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;background:#174d49;border-radius:7px;padding:8px}.game-board i{width:clamp(10px,1.45vw,19px);aspect-ratio:1;border-radius:50%;background:#e1f0ec}.game-board .light{background:#e8b959}.game-board .dark{background:#76bdb1}.case .game-preview{max-height:315px}
 
-.work-index {
-  position:relative; isolation:isolate; padding:20px; border:1px solid #d4dbd0;
-  border-radius:14px; background:#fdfcf8; box-shadow:0 12px 30px #282d2110;
+
+.proof {
+  min-width: 0;
+  padding: clamp(18px, 3vw, 34px);
+  border: 1px solid #cdd8cd;
+  border-radius: 12px;
+  background: #fff;
 }
-.work-index::before {
-  content:""; position:absolute; inset:6px -6px -6px 6px; border:1px solid #d5ddce;
-  border-radius:inherit; z-index:-1; pointer-events:none;
+.proof h2 { font-size: clamp(1.5rem, 3vw, 2.3rem); margin: 8px 0 16px; }
+.reconciliation { margin: 0 0 11px; font-size: clamp(.85rem, 1.4vw, 1rem); }
+.reconciliation > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  padding: 8px 0;
 }
-.work-index h2 {font-size:1.16rem; margin:0 0 12px; letter-spacing:-.025em}
-.work-index ul {list-style:none; padding:0; margin:0; display:grid; gap:6px}
-.work-index a {
-  display:grid; grid-template-columns:35px 1fr auto; gap:11px; align-items:center;
-  min-height:58px; text-decoration:none; border:1px solid #eaebe3; background:#fff;
-  border-radius:7px; padding:7px 10px; transition:background .18s ease, translate .18s ease;
+.reconciliation dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
+.difference { border-top: 1px solid #cad8ce; color: var(--teal); font-weight: 700; }
+.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  align-items: center;
 }
-.work-index a:hover,.work-index a:focus-visible {background:#f5f7ed; translate:3px 0}
-.index-icon {display:grid; place-items:center; width:32px; height:32px; border-radius:6px; font-weight:750}
-.index-finance {background:#e1e9d7; color:#324c21}
-.index-data {background:#e2eced; color:#2b5961}
-.index-ml {background:#f4e6d8; color:#74482b}
-.work-index strong,.work-index small {display:block}
-.work-index strong {font-size:.88rem; line-height:1.25}
-.work-index small {color:var(--muted); font-size:.76rem}
-.index-arrow {color:var(--teal)}
-.project {background:#fff; transition:border-color .2s ease,box-shadow .22s ease}
-.project:hover,.project:focus-within {border-color:#afc1ae; box-shadow:0 8px 22px #252b1910}
-.project-image {overflow:hidden}
-.project-image img,.game-preview {transition:scale .35s cubic-bezier(.2,.65,.3,1)}
-.project:hover .project-image img,.project:hover .game-preview {scale:1.035}
-.primary {background:#254e45}
-.secondary {background:transparent}
-.contact .secondary {background:white}
-@media (prefers-reduced-motion:no-preference) {
-  .hero-grid > :first-child {animation:page-enter .45s cubic-bezier(.2,.65,.3,1) both}
-  .work-index {animation:page-enter .52s .09s cubic-bezier(.2,.65,.3,1) both}
-  @keyframes page-enter {from {opacity:0; translate:0 12px} to {opacity:1; translate:0 0}}
+.featured .project-image { aspect-ratio: 1.85; }
+.project .arrow { align-self: flex-start; }
+.project h3 a:hover, .arrow:hover, nav a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.nav-resume { color: var(--teal); }
+.contact .primary { flex-shrink: 0; }
+@media (max-width: 720px) {
+  .featured { grid-template-columns: minmax(0, 1fr); }
+  .featured .project-image { aspect-ratio: 2.12; }
 }
-@media (prefers-reduced-motion:reduce) {
-  .work-index a,.project,.project-image img,.game-preview {transition:none}
-  .work-index a:hover,.work-index a:focus-visible {translate:none}
-  .project:hover .project-image img,.project:hover .game-preview {scale:1}
+@media (max-width: 410px) {
+  .top { flex-wrap: wrap; justify-content: flex-start; column-gap: 15px; padding-block: 10px; }
+  nav { gap: 12px; }
 }
