@@ -60,23 +60,34 @@ footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-s
 
 
 
-.proof {
+.project-spotlight {
   min-width: 0;
   padding: clamp(18px, 3vw, 34px);
   border: 1px solid #cdd8cd;
   border-radius: 12px;
   background: #fff;
 }
-.proof h2 { font-size: clamp(1.5rem, 3vw, 2.3rem); margin: 8px 0 16px; }
-.reconciliation { margin: 0 0 11px; font-size: clamp(.85rem, 1.4vw, 1rem); }
-.reconciliation > div {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px;
-  padding: 8px 0;
+.project-spotlight h2 { font-size: clamp(1.5rem, 3vw, 2.3rem); margin: 8px 0 16px; }
+.pipeline {
+  list-style: none;
+  margin: 0 0 14px 5px;
+  padding: 0 0 0 15px;
+  border-left: 1px solid #9eb6a8;
 }
-.reconciliation dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
-.difference { border-top: 1px solid #cad8ce; color: var(--teal); font-weight: 700; }
+.pipeline li { position: relative; padding-bottom: 13px; }
+.pipeline li:last-child { padding-bottom: 2px; }
+.pipeline li::before {
+  content: "";
+  position: absolute;
+  top: .56em;
+  left: -19px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.pipeline strong, .pipeline span { display: block; }
+.pipeline span { color: var(--muted); font-size: .87rem; }
 .featured {
   grid-column: 1 / -1;
   display: grid;

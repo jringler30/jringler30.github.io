@@ -15,14 +15,14 @@
         <a class="secondary" href="/assets/joshua-ringler-resume.pdf">View résumé <span aria-hidden="true">↗</span></a>
       </div>
     </div>
-    <aside class="proof" aria-labelledby="proof-title">
-      <p class="label">Mini ERP · Synthetic data</p>
-      <h2 id="proof-title">Do the totals match?</h2>
-      <dl class="reconciliation">
-        <div><dt>Source orders</dt><dd>$691,024.17</dd></div>
-        <div><dt>Reporting model</dt><dd>$691,024.17</dd></div>
-        <div class="difference"><dt>Difference</dt><dd>$0.00</dd></div>
-      </dl>
+    <aside class="project-spotlight" aria-labelledby="spotlight-title">
+      <p class="label">Featured project · Mini ERP</p>
+      <h2 id="spotlight-title">From orders to reporting</h2>
+      <ol class="pipeline">
+        <li><strong>Model the order lifecycle</strong><span>Orders, shipments, invoices, and payments</span></li>
+        <li><strong>Build the reporting layer</strong><span>Python and SQL ETL into a star schema</span></li>
+        <li><strong>Make operations visible</strong><span>Revenue and fulfillment dashboards in Streamlit</span></li>
+      </ol>
       <a class="arrow" href="/work/order-to-cash/">Read the ERP case study <span aria-hidden="true">→</span></a>
     </aside>
   </div>
@@ -34,7 +34,7 @@
       <div class="project-content">
         <p class="label">Data engineering · Personal project</p>
         <h3><a href="/work/order-to-cash/">Mini ERP Order-to-Cash</a></h3>
-        <p>I built a Python and SQL pipeline from orders to reporting, then verified that 3,011 sales lines and the paid revenue totals matched the synthetic source data.</p>
+        <p>I designed a relational model for the order lifecycle and built a Python and SQL pipeline that feeds a Streamlit dashboard for revenue and fulfillment.</p>
         <a class="arrow" href="https://github.com/jringler30/mini-erp-order-to-cash">ERP source code <span aria-hidden="true">↗</span></a>
       </div>
       <img class="project-image" src="/assets/images/order-to-cash.webp" alt="Order-to-cash reporting dashboard" loading="lazy" width="1467" height="1100">
