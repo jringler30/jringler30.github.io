@@ -42,7 +42,7 @@ h2{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.045em;margin:6px 0 22px}
 .intro{max-width:75ch}
 .timeline-head{margin:28px 0 12px}.timeline-head h3{font-size:1.55rem}
 .filters,.timeline-nav{display:flex;gap:8px;flex-wrap:wrap}
-.filters button,.timeline-nav button{padding:6px 11px;min-height:36px;background:white;color:var(--ink);border:1px solid #b8d1cb;border-radius:5px;font:inherit;font-size:.84rem;cursor:pointer}
+.filters button,.timeline-nav button{padding:6px 11px;min-height:44px;background:white;color:var(--ink);border:1px solid #b8d1cb;border-radius:5px;font:inherit;font-size:.84rem;cursor:pointer}
 .filters button[aria-pressed=true]{background:var(--teal);border-color:var(--teal);color:white}
 .timeline{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 36px)/3);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;list-style:none;margin:12px 0 0;padding:0 0 12px;scrollbar-color:#a1bdb6 transparent}
 .timeline li{scroll-snap-align:start;min-width:0}
@@ -58,7 +58,6 @@ footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-s
 }
 @media(max-width:410px){nav{gap:9px}nav a,.brand{font-size:.76rem}.top{gap:7px}.brand{gap:5px}}
 
-.game-preview{aspect-ratio:1.95;background:#d9ece7;display:grid;place-content:center;justify-items:center;gap:6px;color:#17423e;font-size:.72rem;font-weight:700;letter-spacing:.06em}.game-board{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;background:#174d49;border-radius:7px;padding:8px}.game-board i{width:clamp(10px,1.45vw,19px);aspect-ratio:1;border-radius:50%;background:#e1f0ec}.game-board .light{background:#e8b959}.game-board .dark{background:#76bdb1}.case .game-preview{max-height:315px}
 
 
 .proof {
@@ -126,4 +125,10 @@ footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-s
 @media (prefers-reduced-motion: no-preference) {
   .measure:not([hidden]) { animation: measure-change 170ms ease-out; }
   @keyframes measure-change { from { opacity: .65; } to { opacity: 1; } }
+}
+
+.timeline-nav button { min-width: 44px; }
+.timeline-nav button[aria-disabled=true] { opacity: .5; cursor: default; }
+@media (min-width: 721px) {
+  .timeline-head { min-height: 44px; }
 }
